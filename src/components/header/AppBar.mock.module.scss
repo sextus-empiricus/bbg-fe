@@ -6,3 +6,13 @@
   background: linear-gradient(90deg, #4ca5ff 2.34%, #b673f8 100.78%);
   -webkit-background-clip: text;
 }
+
+.span-email {
+  margin-right: 10px;
+
+}
+
+.span-email:hover {
+  color: plum;
+  cursor: pointer;
+}
