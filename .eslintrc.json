@@ -33,7 +33,8 @@
     "spaced-comment": "error",
     "quotes": [
       "error",
-      "single"
+      "single",
+      "avoid-escape"
     ],
     "no-duplicate-imports": "error",
     "simple-import-sort/exports": "error",

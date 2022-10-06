@@ -1,12 +1,21 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material';
+
+import { AppRouter } from './routes/AppRouter';
+import { theme } from './theme';
 
 import './App.scss';
 
 function App() {
    return (
-      <div className='App'>
-         <h1>init🚀</h1>
-      </div>
+      <ThemeProvider theme={theme}>
+         <BrowserRouter>
+            <div className='App'>
+               <AppRouter />
+            </div>
+         </BrowserRouter>
+      </ThemeProvider>
    );
 }
 
