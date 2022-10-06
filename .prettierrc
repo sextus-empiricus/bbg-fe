@@ -5,9 +5,5 @@
   "singleQuote": true,
   "trailingComma": "all",
   "jsxSingleQuote": true,
-  "bracketSpacing": true,
-  "extends": [
-    "stylelint-config-standard-scss",
-    "stylelint-config-prettier-scss"
-  ]
+  "bracketSpacing": true
 }
