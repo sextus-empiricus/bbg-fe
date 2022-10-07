@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { FormProvider, SubmitHandler, useForm, UseFormReturn } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { AuthDtoInterface } from '@backend';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Email, Lock } from '@mui/icons-material';
@@ -8,6 +8,7 @@ import { object, string } from 'yup';
 
 import { useAuth } from '../../auth/useAuth';
 
+import { useFormError } from './hooks/useFormError';
 import { AuthInput, Separator } from './elements';
 
 const SigninDtoSchema = object().shape({
@@ -17,27 +18,19 @@ const SigninDtoSchema = object().shape({
    password: string().required('Please provide a password'),
 });
 
-const setInvalidCredentialsError = (methods: UseFormReturn<AuthDtoInterface>, message: string) => {
-   methods.setError('password', {
-      type: 'string',
-      message,
-   });
-   methods.setError('email', {
-      type: 'string',
-      message,
-   });
-};
-
 const SignInForm = (): ReactElement => {
    const { signIn } = useAuth();
    const methods = useForm<AuthDtoInterface>({
       resolver: yupResolver(SigninDtoSchema),
    });
+   const { setAllErrors } = useFormError(methods);
 
    const onSubmit: SubmitHandler<AuthDtoInterface> = async (authDto) => {
       const res = await signIn(authDto);
-      if (!res.status) {
-         setInvalidCredentialsError(methods, res.message);
+      if (res.message === 'Network Error') {
+         setAllErrors();
+      } else if (!res.status) {
+         setAllErrors('Incorrect email or password');
       }
    };
 
@@ -45,7 +38,7 @@ const SignInForm = (): ReactElement => {
       <Paper
          elevation={3}
          sx={{
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(255,255,255,0.03)',
             padding: '25px',
             width: '350px',
             backdropFilter: 'blur(5px)',
