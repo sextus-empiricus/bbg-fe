@@ -1,9 +1,15 @@
 import React, { ReactElement } from 'react';
+import { AccountCircle } from '@mui/icons-material';
 import { Box } from '@mui/material';
+
+import { useAuth } from '../../auth/useAuth';
+import { useUser } from '../../auth/useUser';
 
 import classes from './AppBar.mock.module.scss';
 
 const AppBarMock = (): ReactElement => {
+   const { signOut } = useAuth();
+   const { user } = useUser();
    return (
       <Box
          position='fixed'
@@ -22,6 +28,14 @@ const AppBarMock = (): ReactElement => {
          }}
       >
          <h1 className={classes.logo}>BBG</h1>
+         <Box display='flex' justifyContent='center' alignContent='center'>
+            {user?.email && (
+               <span className={classes['span-email']} onClick={signOut}>
+                  {user.email}
+               </span>
+            )}
+            <AccountCircle />
+         </Box>
       </Box>
    );
 };
