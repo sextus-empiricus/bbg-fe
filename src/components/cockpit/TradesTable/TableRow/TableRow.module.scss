@@ -1,0 +1,35 @@
+.Table-row {
+  font-weight: 300;
+  td {
+    padding: 20px 3px;
+  }
+}
+
+.Table-row:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.td-date-time {
+  margin-left: 5px;
+  color: grey;
+}
+
+.td-currency-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.td-currency-icon {
+  margin-right: 5px;
+  width: 26px;
+}
+
+
+.text__profit {
+  color: var(--profit);
+}
+
+.text__loss {
+  color: var(--loss);
+}

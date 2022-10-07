@@ -1,0 +1,22 @@
+.DoubleTd {
+  .historical {
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: left;
+    align-content: center;
+  }
+
+  .actual {
+    display: flex;
+    justify-content: left;
+    align-content: center;
+  }
+}
+
+.text__profit {
+  color: var(--profit);
+}
+
+.text__loss {
+  color: var(--loss);
+}

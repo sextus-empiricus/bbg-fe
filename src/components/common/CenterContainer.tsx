@@ -14,6 +14,7 @@ const CenterContainer = ({ children }: Props): ReactElement => {
          flexDirection='column'
          justifyContent='center'
          alignItems='center'
+         sx={{ border: '1px solid white' }}
       >
          {children}
       </Box>
