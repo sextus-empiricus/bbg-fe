@@ -1,5 +1,5 @@
 export const config = {
-   axios: {
+   api: {
       baseURL: 'http://localhost:3001',
    },
 };

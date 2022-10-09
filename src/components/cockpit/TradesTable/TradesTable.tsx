@@ -1,18 +1,18 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { Box } from '@mui/material';
 
-import { dummyTrades } from '../../../dev/dummy-trades';
-
 import { useTrades } from './hooks/useTrades';
+import { TableFilters } from './TableFilters/TableFilters';
 import { TableRow } from './TableRow/TableRow';
 
 import classes from './TradesTable.module.scss';
 
 const TradesTable = (): ReactElement => {
-   const { tradesList } = useTrades();
+   const { tradesList, userCurrencies } = useTrades();
 
    return (
       <Box sx={{ width: '100%' }}>
+         <TableFilters userCurrencies={userCurrencies ?? []} />
          <table className={classes.TradesTable}>
             <thead>
                <tr>
