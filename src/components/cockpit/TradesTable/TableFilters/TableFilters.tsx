@@ -3,9 +3,10 @@ import { UserCurrenciesEntity } from '@backend';
 import { Box } from '@mui/material';
 
 import { CurrencyFilter } from './CurrencyFilter/CurrencyFilter';
+import { DateFilter } from './DateFilter/DateFilter';
 
 interface Props {
-   userCurrencies: UserCurrenciesEntity[]
+   userCurrencies: UserCurrenciesEntity[];
 }
 
 const TableFilters = ({ userCurrencies }: Props): ReactElement => {
@@ -33,7 +34,9 @@ const TableFilters = ({ userCurrencies }: Props): ReactElement => {
                onChangeHandler={currencyFilterChangeHandler}
             />
          </Box>
-         {/* TODO - add DateFilter here */}
+         <Box display="flex" justifyContent="center">
+            <DateFilter />
+         </Box>
       </Box>
    );
 };
