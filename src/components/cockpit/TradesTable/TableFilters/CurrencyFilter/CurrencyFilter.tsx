@@ -1,18 +1,25 @@
-import React, { ReactElement } from 'react';
-import { UserCurrenciesEntity } from '@backend';
+import React, { ReactElement, SyntheticEvent, useContext, useState } from 'react';
+import { GetMyPaginatedQueryInterface, UserCurrenciesEntity } from '@backend';
 import { Tab, Tabs } from '@mui/material';
 
+import { TableQueryContext } from '../../../../../store/table-query.context';
+
 interface Props {
-   actualValue: any; // TODO
-   onChangeHandler: any; // TODO
    userCurrencies: UserCurrenciesEntity[];
 }
 
-const CurrencyFilter = ({ userCurrencies, actualValue, onChangeHandler }: Props): ReactElement => {
+const CurrencyFilter = ({ userCurrencies }: Props): ReactElement => {
+   const { setQueryObject } = useContext(TableQueryContext);
+   const [currencyFilterValue, setCurrencyFilterValue] = useState('all');
+   const currencyFilterChangeHandler = (e: SyntheticEvent, newValue: string) => {
+      setCurrencyFilterValue(newValue);
+      setQueryObject((prev: GetMyPaginatedQueryInterface) => ({ ...prev, currency: newValue }));
+   };
+
    return (
       <Tabs
-         value={actualValue}
-         onChange={onChangeHandler}
+         value={currencyFilterValue}
+         onChange={currencyFilterChangeHandler}
          variant='scrollable'
          scrollButtons='auto'
          aria-label='scrollable auto tabs example'
@@ -21,13 +28,7 @@ const CurrencyFilter = ({ userCurrencies, actualValue, onChangeHandler }: Props)
          {userCurrencies.map((el) => (
             <Tab
                key={'tab' + el.currency}
-               icon={
-                  <img
-                     src={el.iconUrl}
-                     alt={el.currency + ' icon'}
-                     style={{ width: '20px' }}
-                  />
-               }
+               icon={<img src={el.iconUrl} alt={el.currency + ' icon'} style={{ width: '20px' }} />}
                iconPosition='start'
                value={el.currency}
                label={el.currency.toUpperCase()}

@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material';
 
 import { queryClient } from './react-query/queryClient';
 import { AppRouter } from './routes/AppRouter';
-import { SnackBarProvider } from './store/snackBar.context';
+import { SnackBarProvider } from './store/snack-bar.context';
 import { theme } from './theme';
 
 import './App.scss';

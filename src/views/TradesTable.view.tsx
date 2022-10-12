@@ -1,16 +1,16 @@
 import React, { ReactElement } from 'react';
 
 import { TradesTable } from '../components/cockpit/TradesTable/TradesTable';
-import { CenterContainer } from '../components/common/CenterContainer';
 import { MainLayout } from '../components/layouts/Main/Main.layout';
+import { TableQueryContextProvider } from '../store/table-query.context';
 
 const TradesTableView = (): ReactElement => {
    return (
-      <MainLayout>
-         <CenterContainer>
+      <TableQueryContextProvider>
+         <MainLayout>
             <TradesTable />
-         </CenterContainer>
-      </MainLayout>
+         </MainLayout>
+      </TableQueryContextProvider>
    );
 };
 

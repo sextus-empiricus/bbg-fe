@@ -1,15 +1,15 @@
 import React, { ReactElement } from 'react';
 import { Box, Dialog, Typography } from '@mui/material';
 import { CalendarPicker } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface Props {
-   closeModalHandler: any;
-   fromDateValue: any;
-   showModalDateRangePicker: any;
-   toDateValue: any;
-   updateFromDateHandler: any;
-   updateToDateHandler: any;
+   fromDateValue: Dayjs | null;
+   toDateValue: Dayjs | null;
+   closeModalHandler: () => void;
+   showModalDateRangePicker: boolean;
+   updateFromDateHandler: (newValue: Dayjs | null) => void;
+   updateToDateHandler: (newValue: Dayjs | null) => void;
 }
 
 const ModalDateRangePicker = ({
@@ -24,7 +24,7 @@ const ModalDateRangePicker = ({
       <Dialog
          maxWidth='lg'
          open={showModalDateRangePicker}
-         onClose={() => closeModalHandler()}
+         onClose={closeModalHandler}
          PaperProps={{
             sx: {
                bgcolor: 'rgba(47, 47, 47, 0.5)',
@@ -40,7 +40,7 @@ const ModalDateRangePicker = ({
                </Typography>
                <Box minHeight={360}>
                   <CalendarPicker
-                     minDate={dayjs('2022-01-01')}
+                     minDate={dayjs('2009-01-03')}
                      maxDate={dayjs()}
                      date={fromDateValue}
                      onChange={(newDate) => updateFromDateHandler(newDate)}
@@ -53,7 +53,7 @@ const ModalDateRangePicker = ({
                </Typography>
                <Box minHeight={360}>
                   <CalendarPicker
-                     minDate={dayjs('2022-01-01')}
+                     minDate={dayjs('2009-01-03')}
                      maxDate={dayjs()}
                      date={toDateValue}
                      onChange={(newDate) => updateToDateHandler(newDate)}
@@ -61,6 +61,9 @@ const ModalDateRangePicker = ({
                </Box>
             </Box>
          </Box>
+         <Typography variant='subtitle2' component='span' textAlign='center' sx={{ opacity: 0.5 }}>
+            [ESC]
+         </Typography>
       </Dialog>
    );
 };

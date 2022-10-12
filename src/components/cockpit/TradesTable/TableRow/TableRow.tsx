@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import { TradeMinified } from '@backend';
 import { Tooltip } from '@mui/material';
 
 import { useCurrencyActualPrice } from '../../../../hooks/useCurrencyActualPrice';
@@ -9,7 +10,7 @@ import { TableRowButton } from './TableRowButton';
 import classes from './TableRow.module.scss';
 
 interface Props {
-   trade: any;
+   trade: TradeMinified;
 }
 
 const TableRow = ({ trade }: Props): ReactElement => {
@@ -27,7 +28,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
          <td className={classes['td-currency']}>
             <div className={classes['td-currency-wrapper']}>
                <img
-                  src={trade.iconUrl}
+                  src={trade.iconUrl as string}
                   alt={trade.currency + ' icon'}
                   className={classes['td-currency-icon']}
                />
@@ -43,22 +44,14 @@ const TableRow = ({ trade }: Props): ReactElement => {
             {move >= 0 ? '+' + move.toFixed(2) : move.toFixed(2)}%
          </td>
          <DoubleTd
-            actualValue={(+trade.boughtFor + (+trade.boughtFor * move) / 100).toFixed(2)}
-            historicalValue={(+trade.boughtFor).toFixed(2)}
+            actualValue={+(+trade.boughtFor + (+trade.boughtFor * move) / 100).toFixed(2)}
+            historicalValue={+(+trade.boughtFor).toFixed(2)}
          ></DoubleTd>
-         <DoubleTd actualValue={actualPrice} historicalValue={(+trade.price).toFixed(2)}></DoubleTd>
+         <DoubleTd
+            actualValue={actualPrice}
+            historicalValue={+(+trade.price).toFixed(2)}
+         ></DoubleTd>
          <td>
-            {/* <Button */}
-            {/*    variant='text' */}
-            {/*    sx={{ */}
-            {/*       color: 'white', */}
-            {/*       '&:hover': { */}
-            {/*          backgroundColor: move > 0 ? 'rgba(69,255,88,0.1)' : 'rgba(255,119,119,0.1)', */}
-            {/*       }, */}
-            {/*    }} */}
-            {/* > */}
-            {/*    cash */}
-            {/* </Button> */}
             <TableRowButton />
          </td>
       </tr>
