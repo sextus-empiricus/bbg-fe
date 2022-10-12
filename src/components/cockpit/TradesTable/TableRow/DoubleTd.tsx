@@ -4,8 +4,8 @@ import { CurrencyExchange, DateRange } from '@mui/icons-material';
 import classes from './DoubleTd.module.scss';
 
 interface Props {
-   historicalValue: any;
-   actualValue: any;
+   historicalValue: number;
+   actualValue: number;
 }
 
 const DoubleTd = ({ historicalValue, actualValue }: Props): ReactElement => {
@@ -20,7 +20,8 @@ const DoubleTd = ({ historicalValue, actualValue }: Props): ReactElement => {
             <span
                className={`${
                   actualValue > historicalValue ? classes['text__profit'] : classes['text__loss']
-               }`}>
+               }`}
+            >
                {actualValue}$
             </span>
          </div>
