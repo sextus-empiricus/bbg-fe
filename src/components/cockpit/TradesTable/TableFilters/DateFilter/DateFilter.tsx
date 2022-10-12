@@ -1,5 +1,5 @@
 import React, { ReactElement, useContext, useState } from 'react';
-import { DateRange } from '@mui/icons-material';
+import { Close, DateRange } from '@mui/icons-material';
 import { Box, IconButton, Tooltip, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -31,6 +31,13 @@ const DateFilter = (): ReactElement => {
       setToDate(newValue);
       setQueryObject((prev) => ({ ...prev, to: dayjs(newValue).format('YYYY-MM-DD') }));
    };
+   const resetDateFilter = () => {
+      setFromDate(null);
+      setToDate(null);
+      setFromDateHandler(null);
+      setToDateHandler(null);
+   };
+
    // date range picker modal:
    const [showModalDateRangePicker, setShowModalDateRangePicker] = useState<boolean>(false);
    const openModalDateRangePickerHandler = () => {
@@ -39,10 +46,15 @@ const DateFilter = (): ReactElement => {
    const closeModalDateRangePickerHandler = () => {
       setShowModalDateRangePicker(false);
    };
-
+   // TODO - 🚩 from here; data-range inputs animations;
    return (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
          <Box display={fromDate || toDate ? 'flex' : 'none'}>
+            <Tooltip title='reset'>
+               <IconButton onClick={resetDateFilter}>
+                  <Close sx={{ opacity: 0.7 }} />
+               </IconButton>
+            </Tooltip>
             <InputDatePicker
                label='filter start date'
                dateValue={fromDate}

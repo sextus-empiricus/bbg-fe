@@ -21,9 +21,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
       <tr className={classes['Table-row']}>
          <td className={classes['td-date']}>
             {new Date(trade.boughtAt).toLocaleDateString()}
-            <span className={classes['td-date-time']}>
-               {new Date(trade.boughtAt).toLocaleTimeString()}
-            </span>
+            <span className={classes.time}>{new Date(trade.boughtAt).toLocaleTimeString()}</span>
          </td>
          <td className={classes['td-currency']}>
             <div className={classes['td-currency-wrapper']}>
@@ -36,7 +34,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
             </div>
          </td>
          <td>
-            <Tooltip title={trade.amount}>
+            <Tooltip title={Number(trade.amount.toString())}>
                <div>{Number(trade.amount).toFixed(4)}</div>
             </Tooltip>
          </td>
@@ -44,10 +42,18 @@ const TableRow = ({ trade }: Props): ReactElement => {
             {move >= 0 ? '+' + move.toFixed(2) : move.toFixed(2)}%
          </td>
          <DoubleTd
+            tooltipTiles={{
+               historical: 'invested',
+               actual: 'worth now',
+            }}
             actualValue={+(+trade.boughtFor + (+trade.boughtFor * move) / 100).toFixed(2)}
             historicalValue={+(+trade.boughtFor).toFixed(2)}
          ></DoubleTd>
          <DoubleTd
+            tooltipTiles={{
+               historical: 'purchase price',
+               actual: 'actual price',
+            }}
             actualValue={actualPrice}
             historicalValue={+(+trade.price).toFixed(2)}
          ></DoubleTd>
