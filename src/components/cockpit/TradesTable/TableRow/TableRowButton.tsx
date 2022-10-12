@@ -1,5 +1,5 @@
 import React, { MouseEvent, useState } from 'react';
-import { ArrowDropDown, Delete, Edit } from '@mui/icons-material';
+import { ArrowDropDown, CreditCard, Delete, Edit } from '@mui/icons-material';
 import { Button, ButtonGroup, MenuItem, MenuList, Popover } from '@mui/material';
 
 const TableRowButton = () => {
@@ -17,7 +17,17 @@ const TableRowButton = () => {
    return (
       <>
          <ButtonGroup variant='outlined'>
-            <Button>cash</Button>
+            <Button
+               sx={{
+                  display: {
+                     xs: 'none',
+                     sm: 'none',
+                     md: 'block',
+                  },
+               }}
+            >
+               cash
+            </Button>
             <Button size='small' onClick={handlePopoverOpen}>
                <ArrowDropDown />
             </Button>
@@ -36,6 +46,18 @@ const TableRowButton = () => {
             }}
          >
             <MenuList>
+               <MenuItem
+                  sx={{
+                     fontSize: '1rem',
+                     display: {
+                        sm: 'block',
+                        md: 'none',
+                     },
+                  }}
+               >
+                  <CreditCard sx={{ marginRight: 1, fontSize: '1rem' }} />
+                  Cash
+               </MenuItem>
                <MenuItem sx={{ fontSize: '1rem' }}>
                   <Edit sx={{ marginRight: 1, fontSize: '1rem' }} />
                   Edit

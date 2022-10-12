@@ -1,5 +1,6 @@
 .Table-row {
   font-weight: 300;
+
   td {
     padding: 20px 3px;
   }
@@ -9,9 +10,11 @@
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.td-date-time {
-  margin-left: 5px;
-  color: grey;
+.td-date {
+  .time {
+    margin-left: 5px;
+    color: grey;
+  }
 }
 
 .td-currency-wrapper {
@@ -32,4 +35,13 @@
 
 .text__loss {
   color: var(--loss);
+}
+
+
+@media (max-width: 900px) {
+  .td-date {
+    .time {
+      display: none;
+    }
+  }
 }

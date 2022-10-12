@@ -1,0 +1,13 @@
+.ThActive {
+  padding: 8px;
+  text-align: center;
+  font-size: .8rem;
+  font-weight: 300;
+  background-color: rgba(255, 255, 255, 0.05);
+  user-select: none;
+}
+
+.dynamic:hover {
+  cursor: pointer;
+  user-select: none;
+}
