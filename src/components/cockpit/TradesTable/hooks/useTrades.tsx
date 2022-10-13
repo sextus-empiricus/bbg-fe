@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { GetMyPaginatedQueryInterface, GetMyPaginatedResponse } from '@backend';
 
 import { axiosInstance, getJWTHeader } from '../../../../axios';
@@ -46,14 +46,23 @@ const getTrades = async (
 };
 /** This hook uses `TableQueryContext` and must be used inside its provider. */
 const useTrades = () => {
+   const queryClient = useQueryClient();
    const { query } = useContext(TableQueryContext);
    const fallback = { tradesList: [], userCurrencies: [], results: 0, pages: 0, page: 0 };
-   const { data = fallback, refetch } = useQuery<GetMyPaginatedResponse>(queryKeys.trades, () =>
-      getTrades(query),
+   const { data = fallback, refetch } = useQuery<GetMyPaginatedResponse>(
+      [queryKeys.trades, 1],
+      () => getTrades(query),
    );
 
    useEffect(() => {
       refetch();
+      if (query.page && query.limit)
+         if (query.page < query.limit) {
+            const nextPage = query.page + 1;
+            queryClient.prefetchQuery([queryKeys.trades, nextPage], () =>
+               getTrades({ ...query, page: nextPage }),
+            );
+         }
    }, [query]);
 
    return { data };
