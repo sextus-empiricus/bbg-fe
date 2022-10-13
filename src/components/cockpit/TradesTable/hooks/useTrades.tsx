@@ -9,7 +9,7 @@ const getTrades = async (
 ): Promise<GetMyPaginatedResponse> => {
    // QUERY BUILDER:
    let query = '?';
-   // currency:
+   // currency-filter:
    if (queryKeys.currency !== 'all') {
       query += `currency=${queryKeys.currency}`;
    }
@@ -20,6 +20,15 @@ const getTrades = async (
    if (queryKeys.to && queryKeys.to !== 'Invalid Date') {
       query += `&to=${queryKeys.to}`;
    }
+   // sortBy:
+   if (queryKeys.sortBy) {
+      query += `&sortBy=${queryKeys.sortBy}`;
+   }
+   // order:
+   if (queryKeys.order) {
+      query += `&order=${queryKeys.order}`;
+   }
+
    console.log(query);
    const { data } = await axiosInstance.get(`/trades/my${query}`, {
       headers: getJWTHeader(),

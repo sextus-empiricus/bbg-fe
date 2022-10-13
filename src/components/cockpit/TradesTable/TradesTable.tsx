@@ -21,7 +21,7 @@ const TradesTable = (): ReactElement => {
    useEffect(() => {
       /** After changing a query object in `TableQueryContext`
        * ReactQuery is fetching an API before actual context update.
-       * For that reason we are triggering the refetch function here one more.*/
+       * For that reason we are triggering the refetch function here onece more.*/
       refetch();
    }, [query]);
 
@@ -31,12 +31,22 @@ const TradesTable = (): ReactElement => {
          <table className={classes.TradesTable}>
             <thead>
                <tr>
-                  <ThActive isDynamic={true} title='date' widthPerc={25} />
-                  <ThActive isDynamic={true} title='currency' widthPerc={10} />
-                  <ThActive isDynamic={true} title='amount' widthPerc={10} />
+                  <ThActive isDynamic={true} datasetName='boughtAt' title='date' widthPerc={25} />
+                  <ThActive
+                     isDynamic={true}
+                     datasetName='currency'
+                     title='currency'
+                     widthPerc={10}
+                  />
+                  <ThActive isDynamic={true} datasetName='amount' title='amount' widthPerc={10} />
                   <ThActive isDynamic={false} title='move' widthPerc={15} />
-                  <ThActive isDynamic={true} title='invests' widthPerc={15} />
-                  <ThActive isDynamic={true} title='prices' widthPerc={10} />
+                  <ThActive
+                     isDynamic={true}
+                     datasetName='boughtFor'
+                     title='invests'
+                     widthPerc={15}
+                  />
+                  <ThActive isDynamic={true} datasetName='price' title='prices' widthPerc={10} />
                   <ThActive isDynamic={false} title='' widthPerc={15} />
                </tr>
             </thead>
