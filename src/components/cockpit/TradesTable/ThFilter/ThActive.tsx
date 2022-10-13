@@ -5,19 +5,20 @@ import { TableQueryContext } from '../../../../store/table-query.context';
 import classes from './ThActive.module.scss';
 
 interface Props {
+   datasetName?: string;
    isDynamic: boolean;
    widthPerc: number;
    title: string;
 }
 
-const ThActive = ({ isDynamic, title, widthPerc }: Props): ReactElement => {
+const ThActive = ({ datasetName, isDynamic, title, widthPerc }: Props): ReactElement => {
    const {
       query: { sortBy, order },
       setQueryObject,
    } = useContext(TableQueryContext);
 
    const orderSymbol = () => {
-      if (title === sortBy) {
+      if (datasetName === sortBy) {
          switch (order) {
             case 'asc': {
                return '▲';
@@ -51,7 +52,7 @@ const ThActive = ({ isDynamic, title, widthPerc }: Props): ReactElement => {
    return (
       <th
          className={`${classes.ThActive} ${isDynamic && classes.dynamic}`}
-         data-name={title}
+         data-name={datasetName}
          style={{ width: `${widthPerc}%` }}
          onClick={isDynamic ? onClickHandler : undefined}
       >
