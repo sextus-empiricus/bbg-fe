@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { LayoutView, SignInView } from '../views';
-import { SignUpView } from '../views/SignUp.view';
+import { LayoutView, SignInView, SignUpView, TestsView, TradesTableView } from '../views';
 
 const AppRouter = (): ReactElement => {
    return (
@@ -11,6 +10,8 @@ const AppRouter = (): ReactElement => {
          <Route path='/layout' element={<LayoutView />} />
          <Route path='/signin' element={<SignInView />} />
          <Route path='/signup' element={<SignUpView />} />
+         <Route path='/table' element={<TradesTableView />} />
+         <Route path='/tests' element={<TestsView />} />
       </Routes>
    );
 };

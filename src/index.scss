@@ -1,3 +1,8 @@
+:root {
+  --profit: #45ff58;
+  --loss: #ff7777;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -7,4 +12,18 @@
 body {
   color: white;
   font-family: Poppins, Roboto, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;;
+}
+
+::-webkit-scrollbar-track {
+  background: #2e2e2e;
 }
