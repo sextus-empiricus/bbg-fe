@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import { TradeMinified } from '@backend';
 import { Tooltip } from '@mui/material';
+import { motion } from 'framer-motion';
 
 import { useCurrencyActualPrice } from '../../../../hooks/useCurrencyActualPrice';
 
@@ -18,7 +19,12 @@ const TableRow = ({ trade }: Props): ReactElement => {
    const move = (actualPrice * 100) / Number(trade.price) - 100;
 
    return (
-      <tr className={classes['Table-row']}>
+      <motion.tr
+         className={classes['Table-row']}
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         transition={{ duration: 0.2, ease: 'easeIn' }}
+      >
          <td className={classes['td-date']}>
             {new Date(trade.boughtAt).toLocaleDateString()}
             <span className={classes.time}>{new Date(trade.boughtAt).toLocaleTimeString()}</span>
@@ -60,7 +66,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
          <td>
             <TableRowButton />
          </td>
-      </tr>
+      </motion.tr>
    );
 };
 

@@ -15,7 +15,7 @@ const TableFilters = ({ userCurrencies }: Props): ReactElement => {
          <Box display='flex' sx={{ maxWidth: { xs: 320, sm: 480 } }}>
             <CurrencyFilter userCurrencies={userCurrencies} />
          </Box>
-         <Box display='flex' justifyContent='center'>
+         <Box display='flex' justifyContent='center' alignItems='center'>
             <DateFilter />
          </Box>
       </Box>

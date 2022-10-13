@@ -20,7 +20,6 @@ const InputDatePicker = ({ label, setStartDateHandler, dateValue }: Props): Reac
          onChange={(newValue) => {
             setStartDateHandler(newValue);
          }}
-         // renderInput={({ inputRef, inputProps, InputProps }) => ( - TODO `InputProps` removed, check if it works'
          renderInput={({ inputRef, inputProps }) => (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                <input ref={inputRef} {...inputProps} className={classes['date-picker-input']} />
