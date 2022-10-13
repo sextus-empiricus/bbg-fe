@@ -1,8 +1,10 @@
+import { useContext, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { GetMyPaginatedQueryInterface, GetMyPaginatedResponse } from '@backend';
 
 import { axiosInstance, getJWTHeader } from '../../../../axios';
 import { queryKeys } from '../../../../react-query/queryKeys';
+import { TableQueryContext } from '../../../../store/table-query.context';
 
 const getTrades = async (
    queryKeys: GetMyPaginatedQueryInterface,
@@ -28,6 +30,13 @@ const getTrades = async (
    if (queryKeys.order) {
       query += `&order=${queryKeys.order}`;
    }
+   // pagination:
+   if (queryKeys.limit) {
+      query += `&limit=${queryKeys.limit}`;
+   }
+   if (queryKeys.page) {
+      query += `&page=${queryKeys.page}`;
+   }
 
    console.log(query);
    const { data } = await axiosInstance.get(`/trades/my${query}`, {
@@ -35,13 +44,19 @@ const getTrades = async (
    });
    return data;
 };
-
-const useTrades = (query: GetMyPaginatedQueryInterface) => {
-   const fallback = { tradesList: [], userCurrencies: [] };
+/** This hook uses `TableQueryContext` and must be used inside its provider. */
+const useTrades = () => {
+   const { query } = useContext(TableQueryContext);
+   const fallback = { tradesList: [], userCurrencies: [], results: 0, pages: 0, page: 0 };
    const { data = fallback, refetch } = useQuery<GetMyPaginatedResponse>(queryKeys.trades, () =>
       getTrades(query),
    );
-   return { data, refetch };
+
+   useEffect(() => {
+      refetch();
+   }, [query]);
+
+   return { data };
 };
 
 export { useTrades };
