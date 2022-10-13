@@ -14,28 +14,28 @@ interface Props {
 /*@ts-ignore*/
 const TableQueryContext: Context<TableQueryContextInterface> = createContext({
    query: {
-      historical: '',
-      sortBy: '',
-      order: '',
-      currency: '',
-      page: '',
-      limit: '',
-      from: '',
-      to: '',
+      historical: undefined,
+      sortBy: undefined,
+      order: undefined,
+      currency: undefined,
+      page: undefined,
+      limit: undefined,
+      from: undefined,
+      to: undefined,
    },
    setQueryObject: () => {},
 });
 
 const TableQueryContextProvider = ({ children }: Props) => {
    const [query, setQuery] = useState<GetMyPaginatedQueryInterface>({
-      historical: '',
-      limit: '10',
-      page: '1',
+      historical: undefined,
+      limit: 10,
+      page: 1,
       currency: 'all',
-      from: '',
-      order: '',
-      sortBy: '',
-      to: '',
+      from: undefined,
+      order: undefined,
+      sortBy: undefined,
+      to: undefined,
    });
 
    const contextValue: TableQueryContextInterface = {

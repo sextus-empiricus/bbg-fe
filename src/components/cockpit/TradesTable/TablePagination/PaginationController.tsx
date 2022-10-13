@@ -14,23 +14,23 @@ const PaginationController = () => {
    } = useTrades();
 
    const handleChangePage = (event: MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-      setQueryObject((prev) => ({ ...prev, page: String(newPage + 1) }));
+      setQueryObject((prev) => ({ ...prev, page: newPage + 1 }));
    };
 
    const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setQueryObject((prev) => ({
          ...prev,
-         limit: String(parseInt(event.target.value, 10)),
-         page: String(1),
+         limit: parseInt(event.target.value, 10),
+         page: 1,
       }));
    };
 
    const setPage = () => {
       if (limit && page) {
-         if (+limit >= +results) {
+         if (limit >= results) {
             return 0;
          }
-         return +page - 1;
+         return page - 1;
       }
       return 0;
    };
