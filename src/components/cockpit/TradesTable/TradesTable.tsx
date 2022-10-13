@@ -1,8 +1,6 @@
-import React, { ReactElement, useContext, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 import { TradeMinified } from '@backend';
 import { Box } from '@mui/material';
-
-import { TableQueryContext } from '../../../store/table-query.context';
 
 import { useTrades } from './hooks/useTrades';
 import { TableFilters } from './TableFilters/TableFilters';
@@ -12,18 +10,9 @@ import { ThActive } from './ThFilter/ThActive';
 import classes from './TradesTable.module.scss';
 
 const TradesTable = (): ReactElement => {
-   const { query } = useContext(TableQueryContext);
    const {
       data: { tradesList, userCurrencies },
-      refetch,
-   } = useTrades(query);
-
-   useEffect(() => {
-      /** After changing a query object in `TableQueryContext`
-       * ReactQuery is fetching an API before actual context update.
-       * For that reason we are triggering the refetch function here onece more.*/
-      refetch();
-   }, [query]);
+   } = useTrades();
 
    return (
       <Box sx={{ width: '100%' }}>

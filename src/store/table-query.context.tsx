@@ -29,8 +29,8 @@ const TableQueryContext: Context<TableQueryContextInterface> = createContext({
 const TableQueryContextProvider = ({ children }: Props) => {
    const [query, setQuery] = useState<GetMyPaginatedQueryInterface>({
       historical: '',
-      limit: '',
-      page: '',
+      limit: '10',
+      page: '1',
       currency: 'all',
       from: '',
       order: '',
