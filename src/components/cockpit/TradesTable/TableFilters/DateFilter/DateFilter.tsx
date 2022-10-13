@@ -82,7 +82,7 @@ const DateFilter = (): ReactElement => {
                            variant='subtitle2'
                            component='span'
                            lineHeight='50px'
-                           sx={{ color: 'rgba(255, 255, 255, 0.8)', fontWeight: 400 }}
+                           sx={{ color: 'rgba(255, 255, 255, 0.4)', fontWeight: 400 }}
                         >
                            to
                         </Typography>
