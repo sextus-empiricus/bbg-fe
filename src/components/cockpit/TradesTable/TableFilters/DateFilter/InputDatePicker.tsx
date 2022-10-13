@@ -22,7 +22,12 @@ const InputDatePicker = ({ label, setStartDateHandler, dateValue }: Props): Reac
          }}
          renderInput={({ inputRef, inputProps }) => (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-               <input ref={inputRef} {...inputProps} className={classes['date-picker-input']} />
+               <input
+                  ref={inputRef}
+                  {...inputProps}
+                  className={classes['date-picker-input']}
+                  placeholder='dd-mm-yyyy'
+               />
             </Box>
          )}
       />
