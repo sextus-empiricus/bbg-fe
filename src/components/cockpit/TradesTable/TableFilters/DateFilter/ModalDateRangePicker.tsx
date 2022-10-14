@@ -27,6 +27,7 @@ const ModalDateRangePicker = ({
          onClose={closeModalHandler}
          PaperProps={{
             sx: {
+               margin: 0,
                bgcolor: 'rgba(47, 47, 47, 0.5)',
                backdropFilter: 'blur(5px)',
                padding: 2,
