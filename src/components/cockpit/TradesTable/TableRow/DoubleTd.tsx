@@ -2,6 +2,8 @@ import React, { ReactElement } from 'react';
 import { CurrencyExchange, DateRange } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 
+import { DisplayData } from './utils/DisplayData';
+
 import classes from './DoubleTd.module.scss';
 
 interface tooltipTiles {
@@ -28,7 +30,7 @@ const DoubleTd = ({
             <Tooltip title={tooltipTiles?.historical}>
                <DateRange opacity={0.2} className={classes.icon} />
             </Tooltip>
-            <span className={classes['text']}>{historicalValue}$</span>
+            <span className={classes['text']}>{DisplayData.money(historicalValue)}</span>
          </div>
          <div className={classes['actual']}>
             <Tooltip title={tooltipTiles?.actual}>
@@ -39,7 +41,7 @@ const DoubleTd = ({
                   actualValue > historicalValue ? classes['text__profit'] : classes['text__loss']
                }`}
             >
-               {actualValue}$
+               {DisplayData.money(actualValue)}
             </span>
          </div>
       </td>

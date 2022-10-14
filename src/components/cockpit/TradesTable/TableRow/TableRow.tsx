@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 import { useCurrencyActualPrice } from '../../../../hooks/useCurrencyActualPrice';
 
+import { DisplayData } from './utils/DisplayData';
 import { DoubleTd } from './DoubleTd';
 import { TableRowButton } from './TableRowButton';
 
@@ -15,8 +16,10 @@ interface Props {
 }
 
 const TableRow = ({ trade }: Props): ReactElement => {
-   const actualPrice = useCurrencyActualPrice(trade.currency);
-   const move = (actualPrice * 100) / Number(trade.price) - 100;
+   const { currency, price, boughtFor, boughtAt, amount, iconUrl } = trade;
+   const actualCurrencyPrice = useCurrencyActualPrice(currency);
+   const move = (actualCurrencyPrice * 100) / Number(price) - 100;
+   const worthToday = +boughtFor + (+boughtFor * move) / 100;
 
    return (
       <motion.tr
@@ -26,29 +29,29 @@ const TableRow = ({ trade }: Props): ReactElement => {
          transition={{ duration: 0.2, ease: 'easeIn' }}
       >
          <td className={classes['td-date']} data-label='date'>
-            {new Date(trade.boughtAt).toLocaleDateString()}
-            <span className={classes.time}>{new Date(trade.boughtAt).toLocaleTimeString()}</span>
+            {DisplayData.date(boughtAt)}
+            <span className={classes.time}>{DisplayData.time(boughtAt)}</span>
          </td>
          <td className={classes['td-currency']} data-label='currency'>
             <div className={classes['td-currency-wrapper']}>
                <img
-                  src={trade.iconUrl as string}
-                  alt={trade.currency + ' icon'}
+                  src={iconUrl ?? ''}
+                  alt={currency + ' ' + 'icon'}
                   className={classes['td-currency-icon']}
                />
-               {trade.currency.toUpperCase()}
+               {DisplayData.currency(currency)}
             </div>
          </td>
          <td data-label='amount'>
-            <Tooltip title={Number(trade.amount.toString())}>
-               <div>{Number(trade.amount).toFixed(4)}</div>
+            <Tooltip title={DisplayData.amount(amount)}>
+               <span>{DisplayData.amountMini(amount)}</span>
             </Tooltip>
          </td>
          <td
             className={`${move >= 0 ? classes['text__profit'] : classes['text__loss']}`}
             data-label='move%'
          >
-            {move >= 0 ? '+' + move.toFixed(2) : move.toFixed(2)}%
+            {DisplayData.percMove(move)}
          </td>
          <DoubleTd
             dataLabel='invests'
@@ -56,8 +59,8 @@ const TableRow = ({ trade }: Props): ReactElement => {
                historical: 'invested',
                actual: 'worth now',
             }}
-            actualValue={+(+trade.boughtFor + (+trade.boughtFor * move) / 100).toFixed(2)}
-            historicalValue={+(+trade.boughtFor).toFixed(2)}
+            actualValue={worthToday}
+            historicalValue={+boughtFor}
          ></DoubleTd>
          <DoubleTd
             dataLabel='price'
@@ -65,8 +68,8 @@ const TableRow = ({ trade }: Props): ReactElement => {
                historical: 'purchase price',
                actual: 'actual price',
             }}
-            actualValue={actualPrice}
-            historicalValue={+(+trade.price).toFixed(2)}
+            actualValue={actualCurrencyPrice}
+            historicalValue={+price}
          ></DoubleTd>
          <td>
             <TableRowButton />
