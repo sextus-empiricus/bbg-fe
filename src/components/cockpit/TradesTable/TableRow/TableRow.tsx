@@ -3,7 +3,7 @@ import { TradeMinified } from '@backend';
 import { Tooltip } from '@mui/material';
 import { motion } from 'framer-motion';
 
-import { useCurrencyActualPrice } from '../../../../hooks/useCurrencyActualPrice';
+import { useActualCurrencyPrice } from '../../../../hooks/useActualCurrencyPrice';
 
 import { DisplayData } from './utils/DisplayData';
 import { DoubleTd } from './DoubleTd';
@@ -16,8 +16,8 @@ interface Props {
 }
 
 const TableRow = ({ trade }: Props): ReactElement => {
+   const { data: actualCurrencyPrice } = useActualCurrencyPrice(trade.currency);
    const { currency, price, boughtFor, boughtAt, amount, iconUrl } = trade;
-   const actualCurrencyPrice = useCurrencyActualPrice(currency);
    const move = (actualCurrencyPrice * 100) / Number(price) - 100;
    const worthToday = +boughtFor + (+boughtFor * move) / 100;
 
