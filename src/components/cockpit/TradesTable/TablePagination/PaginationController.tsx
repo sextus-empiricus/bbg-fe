@@ -42,7 +42,7 @@ const PaginationController = () => {
          page={setPage()}
          onPageChange={handleChangePage}
          rowsPerPage={limit ? +limit : 10}
-         labelRowsPerPage='Trades per page'
+         labelRowsPerPage='per page'
          rowsPerPageOptions={[5, 10, 20, 50]}
          onRowsPerPageChange={handleChangeRowsPerPage}
       />

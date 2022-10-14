@@ -25,11 +25,11 @@ const TableRow = ({ trade }: Props): ReactElement => {
          animate={{ opacity: 1 }}
          transition={{ duration: 0.2, ease: 'easeIn' }}
       >
-         <td className={classes['td-date']}>
+         <td className={classes['td-date']} data-label='date'>
             {new Date(trade.boughtAt).toLocaleDateString()}
             <span className={classes.time}>{new Date(trade.boughtAt).toLocaleTimeString()}</span>
          </td>
-         <td className={classes['td-currency']}>
+         <td className={classes['td-currency']} data-label='currency'>
             <div className={classes['td-currency-wrapper']}>
                <img
                   src={trade.iconUrl as string}
@@ -39,15 +39,19 @@ const TableRow = ({ trade }: Props): ReactElement => {
                {trade.currency.toUpperCase()}
             </div>
          </td>
-         <td>
+         <td data-label='amount'>
             <Tooltip title={Number(trade.amount.toString())}>
                <div>{Number(trade.amount).toFixed(4)}</div>
             </Tooltip>
          </td>
-         <td className={`${move >= 0 ? classes['text__profit'] : classes['text__loss']}`}>
+         <td
+            className={`${move >= 0 ? classes['text__profit'] : classes['text__loss']}`}
+            data-label='move%'
+         >
             {move >= 0 ? '+' + move.toFixed(2) : move.toFixed(2)}%
          </td>
          <DoubleTd
+            dataLabel='invests'
             tooltipTiles={{
                historical: 'invested',
                actual: 'worth now',
@@ -56,6 +60,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
             historicalValue={+(+trade.boughtFor).toFixed(2)}
          ></DoubleTd>
          <DoubleTd
+            dataLabel='price'
             tooltipTiles={{
                historical: 'purchase price',
                actual: 'actual price',

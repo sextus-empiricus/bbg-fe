@@ -1,4 +1,8 @@
 .DoubleTd {
+  .icon {
+    margin-right: 5px;
+  }
+
   .historical {
     margin-bottom: 6px;
     display: flex;
@@ -19,4 +23,26 @@
 
 .text__loss {
   color: var(--loss);
+}
+
+@media screen and (max-width: 600px) {
+  .DoubleTd {
+
+    .historical, .actual {
+      flex-direction: row-reverse;
+
+      .icon {
+        margin-right: 0;
+        margin-left: 5px;
+      }
+    }
+
+    .historical {
+      justify-content: right;
+    }
+
+    .actual {
+      justify-content: right;
+    }
+  }
 }
