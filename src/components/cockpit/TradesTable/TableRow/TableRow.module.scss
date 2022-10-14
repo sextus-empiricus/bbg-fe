@@ -3,6 +3,7 @@
 
   td {
     padding: 20px 3px;
+    text-align: center;
   }
 }
 
@@ -42,6 +43,36 @@
   .td-date {
     .time {
       display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .Table-row {
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    td {
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+      text-align: right;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    td::before {
+      position: absolute;
+      content: attr(data-label);
+      left: 0;
+      padding-left: 15px;
+      font-size: .9rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .td-currency-wrapper {
+      justify-content: right;
     }
   }
 }

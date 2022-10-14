@@ -10,23 +10,29 @@ interface tooltipTiles {
 }
 
 interface Props {
+   dataLabel: string;
    tooltipTiles?: tooltipTiles;
    historicalValue: number;
    actualValue: number;
 }
 
-const DoubleTd = ({ tooltipTiles, historicalValue, actualValue }: Props): ReactElement => {
+const DoubleTd = ({
+   dataLabel,
+   tooltipTiles,
+   historicalValue,
+   actualValue,
+}: Props): ReactElement => {
    return (
-      <td className={classes.DoubleTd}>
+      <td className={classes.DoubleTd} data-label={dataLabel}>
          <div className={classes['historical']}>
             <Tooltip title={tooltipTiles?.historical}>
-               <DateRange opacity={0.2} sx={{ marginRight: '5px' }} />
+               <DateRange opacity={0.2} className={classes.icon} />
             </Tooltip>
             <span className={classes['text']}>{historicalValue}$</span>
          </div>
          <div className={classes['actual']}>
             <Tooltip title={tooltipTiles?.actual}>
-               <CurrencyExchange opacity={0.2} sx={{ marginRight: '5px' }} />
+               <CurrencyExchange opacity={0.2} className={classes.icon} />
             </Tooltip>
             <span
                className={`${
