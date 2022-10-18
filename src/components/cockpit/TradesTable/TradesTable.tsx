@@ -2,21 +2,18 @@ import React, { ReactElement } from 'react';
 import { TradeMinified } from '@backend';
 import { Box } from '@mui/material';
 
-import { useTrades } from './hooks/useTrades';
-import { TableFilters } from './TableFilters/TableFilters';
 import { TableRow } from './TableRow/TableRow';
 import { ThActive } from './ThFilter/ThActive';
 
 import classes from './TradesTable.module.scss';
 
-const TradesTable = (): ReactElement => {
-   const {
-      data: { tradesList, userCurrencies },
-   } = useTrades();
+interface Props {
+   tradesList: TradeMinified[];
+}
 
+const TradesTable = ({ tradesList }: Props): ReactElement => {
    return (
-      <Box sx={{ width: '100%' }}>
-         <TableFilters userCurrencies={userCurrencies ?? []} />
+      <Box sx={{ width: '100%', height: '100%', overflowY: 'auto' }}>
          <table className={classes.TradesTable}>
             <thead>
                <tr>

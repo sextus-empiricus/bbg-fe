@@ -28,7 +28,7 @@ const MainLayout = ({ children }: Props): ReactElement => {
                      lg: 10,
                      xl: 15,
                   },
-                  // bgcolor: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                }}
             >
                {children}
