@@ -10,6 +10,7 @@ interface Props {
 }
 
 const TableFilters = ({ userCurrencies }: Props): ReactElement => {
+
    return (
       <Box display='flex' justifyContent='space-between'>
          <Box display='flex' sx={{ maxWidth: { xs: 320, sm: 480 } }}>

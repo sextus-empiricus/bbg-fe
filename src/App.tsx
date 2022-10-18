@@ -7,6 +7,7 @@ import { ThemeProvider } from '@mui/material';
 import { queryClient } from './react-query/queryClient';
 import { AppRouter } from './routes/AppRouter';
 import { SnackBarProvider } from './store/snack-bar.context';
+import { TableQueryContextProvider } from './store/table-query.context';
 import { theme } from './theme';
 
 import './App.scss';
@@ -15,14 +16,16 @@ function App() {
    return (
       <ThemeProvider theme={theme}>
          <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
-               <SnackBarProvider>
-                  <div className='App'>
-                     <AppRouter />
-                  </div>
-               </SnackBarProvider>
-            </BrowserRouter>
-            <ReactQueryDevtools />
+            <TableQueryContextProvider>
+               <BrowserRouter>
+                  <SnackBarProvider>
+                     <div className='App'>
+                        <AppRouter />
+                     </div>
+                  </SnackBarProvider>
+               </BrowserRouter>
+               <ReactQueryDevtools />
+            </TableQueryContextProvider>
          </QueryClientProvider>
       </ThemeProvider>
    );

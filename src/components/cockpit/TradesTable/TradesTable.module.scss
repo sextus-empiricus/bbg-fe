@@ -3,9 +3,12 @@
   border-spacing: 0;
   width: 100%;
 
-  tbody {
-    background-color: rgba(255, 255, 255, 0.05); //TODO - set in on table wrapper;
-    //backdrop-filter: blur(5px); //TODO - set in on table wrapper;
+  thead {
+    position: sticky;
+    top: 0;
+    background-color: rgb(29 48 79 / 70%);
+    backdrop-filter: blur(5px);
+    z-index: 10;
   }
 }
 
