@@ -56,7 +56,8 @@ const Cockpit = (): ReactElement => {
                   <TradesTable tradesList={tradesList} />
                </Box>
                <Box
-                  className={classes.background}
+                  // className={classes.background}
+                  bgcolor='rgba(255, 255, 255, 0.05)'
                   position='absolute'
                   bottom={0}
                   left={0}
