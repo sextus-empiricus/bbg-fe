@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 
-import { MainLayout } from '../components/layouts/Main/Main.layout';
+import { BaseLayout } from '../components/layouts/BaseLayout/Base.layout';
 
 const LayoutView = (): ReactElement => {
-   return <MainLayout />;
+   return <BaseLayout />;
 };
 
 export { LayoutView };

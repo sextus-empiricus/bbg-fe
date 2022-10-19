@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react';
 
 import { Cockpit } from '../components/cockpit/Cockpit';
-import { MainLayout } from '../components/layouts/Main/Main.layout';
+import { CockpitLayout } from '../components/layouts/Cockpit.layout';
 
 const CockpitView = (): ReactElement => {
    return (
-      <MainLayout>
+      <CockpitLayout>
          <Cockpit />
-      </MainLayout>
+      </CockpitLayout>
    );
 };
 

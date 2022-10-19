@@ -1,16 +1,13 @@
 import React, { ReactElement } from 'react';
 
 import { SignInForm } from '../components/auth/SignInForm';
-import { CenterContainer } from '../components/common/CenterContainer';
-import { MainLayout } from '../components/layouts/Main/Main.layout';
+import { AuthLayout } from '../components/layouts/Auth.layout';
 
 const SignInView = (): ReactElement => {
    return (
-      <MainLayout>
-         <CenterContainer>
-            <SignInForm></SignInForm>
-         </CenterContainer>
-      </MainLayout>
+      <AuthLayout>
+         <SignInForm />
+      </AuthLayout>
    );
 };
 
