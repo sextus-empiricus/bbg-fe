@@ -50,13 +50,19 @@ const Cockpit = (): ReactElement => {
                   <ColumnButton type='regular' icon={<QueryStats />} text='Statistics' />
                </Box>
             </Box>
+            <Box
+               sx={{
+                  height: '100px',
+                  width: '200px',
+                  bgcolor: 'red',
+               }}
+            ></Box>
             <Box className={classes.right}>
                <TableFilters userCurrencies={userCurrencies} />
                <Box height='calc(100% - 110px)' className={classes.background}>
                   <TradesTable tradesList={tradesList} />
                </Box>
                <Box
-                  // className={classes.background}
                   bgcolor='rgba(255, 255, 255, 0.05)'
                   position='absolute'
                   bottom={0}
