@@ -24,8 +24,8 @@ function App() {
                      </div>
                   </SnackBarProvider>
                </BrowserRouter>
-               <ReactQueryDevtools />
             </TableQueryContextProvider>
+            <ReactQueryDevtools />
          </QueryClientProvider>
       </ThemeProvider>
    );
