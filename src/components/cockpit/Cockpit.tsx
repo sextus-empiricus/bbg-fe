@@ -1,14 +1,13 @@
 import React, { ReactElement } from 'react';
 import { AccountBalance, Add, QueryStats, TrendingUp } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
-
-import { LiveClock } from '../common/LiveClock';
+import { Box } from '@mui/material';
 
 import { ColumnButton } from './Menu/ColumnButton/ColumnButton';
 import { useTrades } from './TradesTable/hooks/useTrades';
 import { TableFilters } from './TradesTable/TableFilters/TableFilters';
 import { PaginationController } from './TradesTable/TablePagination/PaginationController';
 import { TradesTable } from './TradesTable/TradesTable';
+import { CockpitHeader } from './CockpitHeader';
 
 import classes from './Cockpit.module.scss';
 
@@ -19,28 +18,7 @@ const Cockpit = (): ReactElement => {
 
    return (
       <Box>
-         <Box display='flex' justifyContent='space-between' sx={{ padding: '20px' }}>
-            <Box>
-               <Typography variant='h4' component='h2' sx={{ fontSize: '2rem' }}>
-                  Active Trades:
-               </Typography>
-            </Box>
-            <Box display='flex' flexDirection='column' alignItems='end' minWidth={80}>
-               <Typography
-                  variant='subtitle2'
-                  component='span'
-                  color='rgba(255, 255, 255, 0.4)'
-                  fontWeight={300}
-                  fontSize='1rem'
-                  fontFamily='Roboto Mono'
-               >
-                  {new Date().toLocaleDateString()}
-               </Typography>
-               <LiveClock
-                  style={{ fontWeight: 300, fontSize: '1.3rem', color: 'rgba(255,255,255, 0.75)' }}
-               />
-            </Box>
-         </Box>
+         <CockpitHeader />
          <Box className={classes.main}>
             <Box className={classes.left}>
                <Box className={classes.content}>
@@ -50,13 +28,6 @@ const Cockpit = (): ReactElement => {
                   <ColumnButton type='regular' icon={<QueryStats />} text='Statistics' />
                </Box>
             </Box>
-            <Box
-               sx={{
-                  height: '100px',
-                  width: '200px',
-                  bgcolor: 'red',
-               }}
-            ></Box>
             <Box className={classes.right}>
                <TableFilters userCurrencies={userCurrencies} />
                <Box height='calc(100% - 110px)' className={classes.background}>

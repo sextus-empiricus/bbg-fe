@@ -26,16 +26,17 @@ const CockpitFooter = (): ReactElement => {
          bottom={0}
          height={30}
          display='flex'
+         justifyContent='space-between'
          bgcolor='rgba(0, 0, 0, 0.5)'
          width='100%'
          sx={{ fontSize: '.9rem' }}
       >
-         <Box height='100%' width='50%' display='flex'>
+         <Box height='100%' display='flex'>
             <CurrencyMoveElement symbol='btc' />
             <span style={separatorStyle}>|</span>
             <CurrencyMoveElement symbol='eth' />
          </Box>
-         <Box height='100%' width='50%' display='flex' justifyContent='right'>
+         <Box height='100%' display='flex' justifyContent='right'>
             <Box
                display='flex'
                height='100%'
