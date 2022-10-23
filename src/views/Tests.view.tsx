@@ -1,16 +1,13 @@
 import React, { ReactElement } from 'react';
 
 import { TableRowButton } from '../components/cockpit/TradesTable/TableRow/TableRowButton';
-import { CenterContainer } from '../components/common/CenterContainer';
-import { MainLayout } from '../components/layouts/Main/Main.layout';
+import { BaseLayout } from '../components/layouts/BaseLayout/Base.layout';
 
 const TestsView = (): ReactElement => {
    return (
-      <MainLayout>
-         <CenterContainer>
-            <TableRowButton />
-         </CenterContainer>
-      </MainLayout>
+      <BaseLayout>
+         <TableRowButton />
+      </BaseLayout>
    );
 };
 

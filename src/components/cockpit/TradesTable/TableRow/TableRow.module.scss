@@ -1,14 +1,15 @@
 .Table-row {
   font-weight: 300;
+  height: 90px;
 
   td {
-    padding: 20px 3px;
     text-align: center;
   }
 }
 
 .Table-row:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.15);
+  //background-color: rgba(255, 255, 255, 0.07);
 }
 
 .td-date {
