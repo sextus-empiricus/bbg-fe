@@ -5,11 +5,13 @@ interface Props {
    icon: ReactNode;
    type?: 'color' | 'regular';
    text?: string;
+   onClickHandler?: () => void;
 }
 
-const ColumnButton = ({ type, icon, text }: Props): ReactElement => {
+const ColumnButton = ({ onClickHandler, type, icon, text }: Props): ReactElement => {
    return (
       <IconButton
+         onClick={onClickHandler}
          sx={{
             marginTop: 1,
             width: 70,
