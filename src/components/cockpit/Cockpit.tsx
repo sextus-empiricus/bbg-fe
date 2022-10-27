@@ -1,8 +1,9 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { AccountBalance, Add, QueryStats, TrendingUp } from '@mui/icons-material';
 import { Box } from '@mui/material';
 
 import { ColumnButton } from './Menu/ColumnButton/ColumnButton';
+import { ModalForm } from './ModalForm/ModalForm';
 import { useTrades } from './TradesTable/hooks/useTrades';
 import { TableFilters } from './TradesTable/TableFilters/TableFilters';
 import { PaginationController } from './TradesTable/TablePagination/PaginationController';
@@ -12,9 +13,17 @@ import { CockpitHeader } from './CockpitHeader';
 import classes from './Cockpit.module.scss';
 
 const Cockpit = (): ReactElement => {
+   const [openModal, setOpenModal] = useState<boolean>(false);
    const {
       data: { tradesList, userCurrencies },
    } = useTrades();
+
+   const modalFormCloseHandler = () => {
+      setOpenModal(false);
+   };
+   const modalFormOpenHandler = () => {
+      setOpenModal(true);
+   };
 
    return (
       <Box>
@@ -22,7 +31,12 @@ const Cockpit = (): ReactElement => {
          <Box className={classes.main}>
             <Box className={classes.left}>
                <Box className={classes.content}>
-                  <ColumnButton type='color' icon={<Add />} text='Trade' />
+                  <ColumnButton
+                     type='color'
+                     icon={<Add />}
+                     text='Trade'
+                     onClickHandler={modalFormOpenHandler}
+                  />
                   <ColumnButton type='regular' icon={<TrendingUp />} text='Trades' />
                   <ColumnButton type='regular' icon={<AccountBalance />} text='History' />
                   <ColumnButton type='regular' icon={<QueryStats />} text='Statistics' />
@@ -50,6 +64,7 @@ const Cockpit = (): ReactElement => {
                </Box>
             </Box>
          </Box>
+         <ModalForm open={openModal} onClose={modalFormCloseHandler} />
       </Box>
    );
 };
