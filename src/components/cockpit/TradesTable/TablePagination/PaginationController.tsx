@@ -1,8 +1,10 @@
 import React, { ChangeEvent, MouseEvent, useContext } from 'react';
-import { TablePagination } from '@mui/material';
+import { Box, TablePagination } from '@mui/material';
 
 import { TableQueryContext } from '../../../../store/table-query.context';
 import { useTrades } from '../hooks/useTrades';
+
+const paginationControllerH = 60;
 
 const PaginationController = () => {
    const {
@@ -36,17 +38,24 @@ const PaginationController = () => {
    };
 
    return (
-      <TablePagination
-         component='div'
-         count={results}
-         page={setPage()}
-         onPageChange={handleChangePage}
-         rowsPerPage={limit ? +limit : 10}
-         labelRowsPerPage='per page'
-         rowsPerPageOptions={[5, 10, 20, 50]}
-         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      <Box
+         height={paginationControllerH}
+         display='flex'
+         justifyContent='center'
+         alignItems='center'
+      >
+         <TablePagination
+            component='div'
+            count={results}
+            page={setPage()}
+            onPageChange={handleChangePage}
+            rowsPerPage={limit ? +limit : 10}
+            labelRowsPerPage='per page'
+            rowsPerPageOptions={[5, 10, 20, 50]}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+         />
+      </Box>
    );
 };
 
-export { PaginationController };
+export { PaginationController, paginationControllerH };
