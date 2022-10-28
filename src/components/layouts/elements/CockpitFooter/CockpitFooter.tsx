@@ -20,18 +20,18 @@ const iconStyle: CSSProperties = {
 const CockpitFooter = (): ReactElement => {
    return (
       <Box
-         paddingX={{ xs: 1, md: 3 }}
+         paddingX={3}
          position='absolute'
          left={0}
          bottom={0}
          height={30}
-         display='flex'
-         justifyContent={{ xs: 'right', md: 'space-between' }}
+         display={{ xs: 'none', md: 'flex' }}
+         justifyContent='space-between'
          bgcolor='rgba(0, 0, 0, 0.5)'
          width='100%'
          sx={{ fontSize: '.9rem' }}
       >
-         <Box height='100%' display={{ xs: 'none', md: 'flex' }}>
+         <Box height='100%' display='flex'>
             <CurrencyMoveElement symbol='btc' />
             <span style={separatorStyle}>|</span>
             <CurrencyMoveElement symbol='eth' />

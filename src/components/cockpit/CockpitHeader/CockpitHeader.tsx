@@ -5,9 +5,16 @@ import { LiveClock } from '../../common/LiveClock';
 
 import classes from './CockpitHeader.module.scss';
 
+const cockpitHeaderMobileH = 60;
+
 const CockpitHeader = (): ReactElement => {
    return (
-      <Box display='flex' justifyContent='space-between' sx={{ padding: '20px' }}>
+      <Box
+         display='flex'
+         justifyContent='space-between'
+         height={{ xs: cockpitHeaderMobileH, sm: 'auto' }}
+         padding='20px'
+      >
          <Box display='flex' justifyContent='center' alignItems='center'>
             <Typography variant='h4' component='h2' sx={{ fontSize: { xs: '1rem', sm: '2rem' } }}>
                Active Trades:
@@ -30,4 +37,4 @@ const CockpitHeader = (): ReactElement => {
    );
 };
 
-export { CockpitHeader };
+export { CockpitHeader, cockpitHeaderMobileH };

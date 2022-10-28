@@ -9,10 +9,12 @@ interface Props {
    userCurrencies: UserCurrenciesEntity[];
 }
 
+const tableFiltersH = 50;
+
 const TableFilters = ({ userCurrencies }: Props): ReactElement => {
    return (
-      <Box display='flex' justifyContent='space-between'>
-         <Box display='flex' sx={{ maxWidth: { xs: 320, sm: 480 } }}>
+      <Box height={tableFiltersH} display='flex' justifyContent='space-between'>
+         <Box display='flex' sx={{ maxWidth: { xs: 300, sm: 480 } }}>
             <CurrencyFilter userCurrencies={userCurrencies} />
          </Box>
          <Box display='flex' justifyContent='center' alignItems='center'>
@@ -22,4 +24,4 @@ const TableFilters = ({ userCurrencies }: Props): ReactElement => {
    );
 };
 
-export { TableFilters };
+export { TableFilters, tableFiltersH };
