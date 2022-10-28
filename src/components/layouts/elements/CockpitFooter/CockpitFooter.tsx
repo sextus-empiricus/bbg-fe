@@ -25,7 +25,7 @@ const CockpitFooter = (): ReactElement => {
          left={0}
          bottom={0}
          height={30}
-         display='flex'
+         display={{ xs: 'none', md: 'flex' }}
          justifyContent='space-between'
          bgcolor='rgba(0, 0, 0, 0.5)'
          width='100%'

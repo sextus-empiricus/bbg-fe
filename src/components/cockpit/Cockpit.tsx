@@ -2,13 +2,17 @@ import React, { ReactElement, useState } from 'react';
 import { AccountBalance, Add, QueryStats, TrendingUp } from '@mui/icons-material';
 import { Box } from '@mui/material';
 
+import { CockpitHeader } from './CockpitHeader/CockpitHeader';
 import { ColumnButton } from './Menu/ColumnButton/ColumnButton';
+import { MobileNav, mobileNavH } from './MobileNav/MobileNav';
 import { ModalForm } from './ModalForm/ModalForm';
 import { useTrades } from './TradesTable/hooks/useTrades';
-import { TableFilters } from './TradesTable/TableFilters/TableFilters';
-import { PaginationController } from './TradesTable/TablePagination/PaginationController';
+import { TableFilters, tableFiltersH } from './TradesTable/TableFilters/TableFilters';
+import {
+   PaginationController,
+   paginationControllerH,
+} from './TradesTable/TablePagination/PaginationController';
 import { TradesTable } from './TradesTable/TradesTable';
-import { CockpitHeader } from './CockpitHeader';
 
 import classes from './Cockpit.module.scss';
 
@@ -29,7 +33,7 @@ const Cockpit = (): ReactElement => {
       <Box>
          <CockpitHeader />
          <Box className={classes.main}>
-            <Box className={classes.left}>
+            <Box className={classes.left} display={{ xs: 'none', sm: 'block' }}>
                <Box className={classes.content}>
                   <ColumnButton
                      type='color'
@@ -44,23 +48,30 @@ const Cockpit = (): ReactElement => {
             </Box>
             <Box className={classes.right}>
                <TableFilters userCurrencies={userCurrencies} />
-               <Box height='calc(100% - 110px)' className={classes.background}>
+               <Box
+                  position='relative'
+                  height={{
+                     xs: `calc(100% - ${tableFiltersH + paginationControllerH + mobileNavH}px)`,
+                     sm: `calc(100% - ${tableFiltersH + paginationControllerH}px)`,
+                  }}
+                  className={classes.background}
+               >
                   <TradesTable tradesList={tradesList} />
                </Box>
                <Box
+                  position='relative'
                   bgcolor='rgba(255, 255, 255, 0.05)'
-                  position='absolute'
-                  bottom={0}
-                  left={0}
-                  height={60}
                   width='100%'
                   display='flex'
                   justifyContent='center'
                   alignItems='center'
-                  borderRadius='0 0 10px 0'
+                  borderRadius={{ xs: 'none', sm: '0 0 10px 0' }}
                >
                   <div className={classes['border-line']} />
                   <PaginationController />
+               </Box>
+               <Box display={{ xs: 'block', sm: 'none' }}>
+                  <MobileNav />
                </Box>
             </Box>
          </Box>

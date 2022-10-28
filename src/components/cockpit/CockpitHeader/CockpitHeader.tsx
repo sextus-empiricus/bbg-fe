@@ -1,13 +1,22 @@
 import React, { ReactElement } from 'react';
 import { Box, Typography } from '@mui/material';
 
-import { LiveClock } from '../common/LiveClock';
+import { LiveClock } from '../../common/LiveClock';
+
+import classes from './CockpitHeader.module.scss';
+
+const cockpitHeaderMobileH = 60;
 
 const CockpitHeader = (): ReactElement => {
    return (
-      <Box display='flex' justifyContent='space-between' sx={{ padding: '20px' }}>
-         <Box>
-            <Typography variant='h4' component='h2' sx={{ fontSize: '2rem' }}>
+      <Box
+         display='flex'
+         justifyContent='space-between'
+         height={{ xs: cockpitHeaderMobileH, sm: 'auto' }}
+         padding='20px'
+      >
+         <Box display='flex' justifyContent='center' alignItems='center'>
+            <Typography variant='h4' component='h2' sx={{ fontSize: { xs: '1rem', sm: '2rem' } }}>
                Active Trades:
             </Typography>
          </Box>
@@ -22,12 +31,10 @@ const CockpitHeader = (): ReactElement => {
             >
                {new Date().toLocaleDateString()}
             </Typography>
-            <LiveClock
-               style={{ fontWeight: 300, fontSize: '1.3rem', color: 'rgba(255,255,255, 0.75)' }}
-            />
+            <LiveClock className={classes.LiveClock} />
          </Box>
       </Box>
    );
 };
 
-export { CockpitHeader };
+export { CockpitHeader, cockpitHeaderMobileH };

@@ -12,7 +12,7 @@ const CockpitContainer = ({ children }: Props): ReactElement => {
          sx={{
             width: '100%',
             maxWidth: '1300px',
-            marginY: 5,
+            marginY: { xs: 0, sm: 5 },
             marginX: {
                xs: 0,
                sm: 5,
