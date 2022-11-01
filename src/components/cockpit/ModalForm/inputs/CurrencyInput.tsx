@@ -18,12 +18,15 @@ const CurrencyInput = ({ showCurrencyIcon, name, label }: Props): ReactElement =
          fullWidth
          error={!!methods.formState.errors[name]}
          helperText={(methods.formState.errors[name]?.message ?? ' ') as ReactNode}
+         InputLabelProps={{ shrink: true }}
          InputProps={{
             endAdornment: (
                <InputAdornment position='end'>
                   {showCurrencyIcon && (
                      <img
-                        src={`https://coinicons-api.vercel.app/api/icon/${methods.watch(name)}`}
+                        src={`https://coinicons-api.vercel.app/api/icon/${methods
+                           .watch(name)
+                           .toLowerCase()}`}
                         alt='currency icon'
                         style={{ height: '24px' }}
                      />
