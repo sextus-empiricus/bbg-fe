@@ -22,6 +22,7 @@ const DateTimeInput = ({ name, label, defaultValue, onChangeHandler }: Props): R
          render={({ field: { onChange, ...restField } }) => (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                <DateTimePicker
+                  ampm={false}
                   label={label}
                   onChange={(event) => {
                      onChange(event);
