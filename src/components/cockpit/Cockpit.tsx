@@ -1,12 +1,8 @@
-import React, { ReactElement, useContext } from 'react';
-import { AccountBalance, Add, QueryStats, TrendingUp } from '@mui/icons-material';
+import React, { ReactElement } from 'react';
 import { Box } from '@mui/material';
 
-import { ModalFormContext } from '../../store/modal-form.context';
-import { ModalFormMode } from '../../types/enums';
-
 import { CockpitHeader } from './CockpitHeader/CockpitHeader';
-import { ColumnButton } from './Menu/ColumnButton/ColumnButton';
+import { ColumnMenu } from './Menu/ColumnMenu';
 import { MobileNav, mobileNavH } from './MobileNav/MobileNav';
 import { ModalForm } from './ModalForm/ModalForm';
 import { useTrades } from './TradesTable/hooks/useTrades';
@@ -20,31 +16,16 @@ import { TradesTable } from './TradesTable/TradesTable';
 import classes from './Cockpit.module.scss';
 
 const Cockpit = (): ReactElement => {
-   const modalFormContext = useContext(ModalFormContext);
    const {
       data: { tradesList, userCurrencies },
    } = useTrades();
-
-   const addTradeButtonHandler = () => {
-      modalFormContext.open.open(ModalFormMode.ADD);
-   };
 
    return (
       <Box>
          <CockpitHeader />
          <Box className={classes.main}>
             <Box className={classes.left} display={{ xs: 'none', sm: 'block' }}>
-               <Box className={classes.content}>
-                  <ColumnButton
-                     type='color'
-                     icon={<Add />}
-                     text='Trade'
-                     onClickHandler={addTradeButtonHandler}
-                  />
-                  <ColumnButton type='regular' icon={<TrendingUp />} text='Trades' />
-                  <ColumnButton type='regular' icon={<AccountBalance />} text='History' />
-                  <ColumnButton type='regular' icon={<QueryStats />} text='Statistics' />
-               </Box>
+               <ColumnMenu />
             </Box>
             <Box className={classes.right}>
                <TableFilters userCurrencies={userCurrencies} />
