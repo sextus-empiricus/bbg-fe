@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 
-export interface CreateTradeDtoInterface {
+export interface AddEditTradeDtoInterface {
    boughtAt: Dayjs | null;
    currency: string;
    boughtFor: number;

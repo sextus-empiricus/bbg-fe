@@ -38,7 +38,6 @@ const getTrades = async (
       query += `&page=${queryKeys.page}`;
    }
 
-   console.log(query);
    const { data } = await axiosInstance.get(`/trades/my${query}`, {
       headers: getJWTHeader(),
    });
@@ -55,17 +54,19 @@ const useTrades = () => {
    );
 
    useEffect(() => {
-      refetch();
-      if (query.page && query.limit)
-         if (query.page < query.limit) {
-            const nextPage = query.page + 1;
-            queryClient.prefetchQuery([queryKeys.trades, nextPage], () =>
-               getTrades({ ...query, page: nextPage }),
-            );
-         }
+      (async () => {
+         await refetch();
+         if (query.page && query.limit)
+            if (query.page < query.limit) {
+               const nextPage = query.page + 1;
+               await queryClient.prefetchQuery([queryKeys.trades, nextPage], () =>
+                  getTrades({ ...query, page: nextPage }),
+               );
+            }
+      })();
    }, [query]);
 
-   return { data };
+   return { data, refetch };
 };
 
 export { useTrades };
