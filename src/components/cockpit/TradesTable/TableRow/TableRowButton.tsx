@@ -1,8 +1,16 @@
-import React, { MouseEvent, useState } from 'react';
+import React, { MouseEvent, useContext, useState } from 'react';
 import { ArrowDropDown, CreditCard, Delete, Edit } from '@mui/icons-material';
 import { Button, ButtonGroup, MenuItem, MenuList, Popover } from '@mui/material';
 
-const TableRowButton = () => {
+import { ModalFormContext } from '../../../../store/modal-form.context';
+import { ModalFormMode } from '../../../../types/enums';
+
+interface Props {
+   tradeId: string;
+}
+
+const TableRowButton = ({ tradeId }: Props) => {
+   const modalFormContext = useContext(ModalFormContext);
    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
    const open = Boolean(anchorEl);
 
@@ -12,6 +20,11 @@ const TableRowButton = () => {
 
    const handlePopoverClose = () => {
       setAnchorEl(null);
+   };
+
+   const editButtonHandler = () => {
+      modalFormContext.tradeId.set(tradeId);
+      modalFormContext.open.open(ModalFormMode.EDIT);
    };
 
    return (
@@ -58,11 +71,14 @@ const TableRowButton = () => {
                   <CreditCard sx={{ marginRight: 1, fontSize: '1rem' }} />
                   Cash
                </MenuItem>
-               <MenuItem sx={{ fontSize: '1rem' }}>
+               <MenuItem sx={{ fontSize: '1rem' }} onClick={editButtonHandler}>
                   <Edit sx={{ marginRight: 1, fontSize: '1rem' }} />
                   Edit
                </MenuItem>
-               <MenuItem sx={{ fontSize: '1rem' }}>
+               <MenuItem
+                  sx={{ fontSize: '1rem' }}
+                  onClick={() => modalFormContext.deleteHandler(tradeId)}
+               >
                   <Delete sx={{ marginRight: 1, fontSize: '1rem' }} />
                   Delete
                </MenuItem>
