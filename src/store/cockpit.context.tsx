@@ -1,6 +1,6 @@
 import React, { Context, createContext, ReactNode, useState } from 'react';
 
-import { CockpitContextMode } from '../types/enums';
+import { CockpitContextMode } from '../types';
 
 interface CockpitContext {
    title: string;

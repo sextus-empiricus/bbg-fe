@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import { CockpitContext } from '../../../store/cockpit.context';
 import { ModalFormContext } from '../../../store/modal-form.context';
-import { CockpitContextMode, ModalFormMode } from '../../../types/enums';
+import { CockpitContextMode, ModalFormMode } from '../../../types';
 
 import { ColumnButton } from './ColumnButton/ColumnButton';
 
@@ -40,15 +40,15 @@ const ColumnMenu = (): ReactElement => {
          <ColumnButton
             type='regular'
             icon={<AccountBalance />}
-            isActive={cockpitContext.mode.value === CockpitContextMode.history}
             text='History'
+            isActive={cockpitContext.mode.value === CockpitContextMode.history}
             onClickHandler={() => onClickHandler(CockpitContextMode.history)}
          />
          <ColumnButton
             type='regular'
             icon={<QueryStats />}
-            isActive={cockpitContext.mode.value === CockpitContextMode.statistics}
             text='Statistics'
+            isActive={cockpitContext.mode.value === CockpitContextMode.statistics}
             onClickHandler={() => onClickHandler(CockpitContextMode.statistics)}
          />
       </Box>
