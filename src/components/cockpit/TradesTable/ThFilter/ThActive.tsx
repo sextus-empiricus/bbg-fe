@@ -1,7 +1,7 @@
 import React, { MouseEvent, ReactElement, useContext } from 'react';
 
 import { TableQueryContext } from '../../../../store/table-query.context';
-import { QueryOrder, QuerySortBy } from '../../../../types/enums/QueryParams.enums';
+import { QueryOrder, QuerySortBy } from '../../../../types';
 
 import classes from './ThActive.module.scss';
 
