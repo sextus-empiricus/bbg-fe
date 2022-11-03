@@ -60,7 +60,6 @@ const DateFilter = (): ReactElement => {
       setShowModalDateRangePicker(false);
    };
 
-   console.log(showDateInputs);
    return (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
          <AnimatePresence>

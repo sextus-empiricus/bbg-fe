@@ -4,7 +4,7 @@ export class DisplayData {
    }
 
    static time(date: Date): string {
-      return new Date(date).toLocaleTimeString();
+      return new Date(date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
    }
 
    static currency(val: string): string {
@@ -21,12 +21,12 @@ export class DisplayData {
       return Number(amount.toFixed(4));
    }
 
-   static percMove(val: string | number): string {
+   static perc(val: string | number): string {
       const percMove = Number(val);
       return percMove >= 0 ? '+' + +percMove.toFixed(2) + '%' : +percMove.toFixed(2) + '%';
    }
 
-   static money(val: string | number): string {
+   static cash(val: string | number): string {
       const money = Number(val);
       return money.toFixed(2) + '$';
    }
