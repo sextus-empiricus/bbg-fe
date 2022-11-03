@@ -17,6 +17,11 @@
   }
 }
 
+.__date {
+  max-width: 160px;
+  margin: 0 auto
+}
+
 .text__profit {
   color: var(--profit);
 }
@@ -44,5 +49,9 @@
     .actual {
       justify-content: right;
     }
+  }
+  .__date {
+    max-width: none;
+    margin: 0
   }
 }
