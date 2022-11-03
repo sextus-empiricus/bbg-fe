@@ -15,7 +15,7 @@ interface Props {
    tradesList: TradeMinified[];
 }
 
-const getColumnWidth = (mode: CockpitContextMode, key: columnsWidthKeys) => {
+const getColumnWidth = (mode: CockpitContextMode, key: columnsWidthKeys): number => {
    if (mode === CockpitContextMode.trades) {
       return columnsWidth.trades[key];
    }
