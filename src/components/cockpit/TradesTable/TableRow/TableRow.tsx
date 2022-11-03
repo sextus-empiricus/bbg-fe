@@ -141,25 +141,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
                {DisplayData.perc(+move)}
             </td>
          )}
-         {/* <DoubleTd */}
-         {/*    dataLabel='invests' */}
-         {/*    tooltipTiles={{ */}
-         {/*       historical: 'invested', */}
-         {/*       actual: 'worth now', */}
-         {/*    }} */}
-         {/*    actualValue={+worthToday} */}
-         {/*    historicalValue={+boughtFor} */}
-         {/* ></DoubleTd> */}
          {renderInvests()}
-         {/* <DoubleTd */}
-         {/*    dataLabel='price' */}
-         {/*    tooltipTiles={{ */}
-         {/*       historical: 'purchase price', */}
-         {/*       actual: 'actual price', */}
-         {/*    }} */}
-         {/*    actualValue={+actualCurrencyPrice} */}
-         {/*    historicalValue={+price} */}
-         {/* ></DoubleTd> */}
          {renderPrices()}
          {mode === CockpitContextMode.history && trade.tradeHistory && (
             <DoubleTd

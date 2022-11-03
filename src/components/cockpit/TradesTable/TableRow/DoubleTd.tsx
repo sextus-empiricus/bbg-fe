@@ -46,7 +46,10 @@ const DoubleTd = ({
          typeof historicalValue === 'number' &&
          typeof actualValue === 'number'
       ) {
-         return [DisplayData.perc(historicalValue), DisplayData.cash(actualValue)];
+         const cashProfit =
+            actualValue >= 0 ? `+${DisplayData.cash(actualValue)}` : DisplayData.cash(actualValue);
+
+         return [DisplayData.perc(historicalValue), cashProfit];
       }
       return ['', ''];
    };
@@ -79,6 +82,9 @@ const DoubleTd = ({
             >
                {renderValues()[0]}
             </span>
+            {mode === 'date' && typeof historicalValue !== 'number' && (
+               <span className={classes.time}>{DisplayData.time(historicalValue)}</span>
+            )}
          </div>
          <div className={`${classes['actual']} ${mode === 'date' && classes['__date']}`}>
             <Tooltip title={tooltipTiles?.actual}>{renderIcon('actual')}</Tooltip>
@@ -94,6 +100,9 @@ const DoubleTd = ({
             >
                {renderValues()[1]}
             </span>
+            {mode === 'date' && typeof actualValue !== 'number' && (
+               <span className={classes.time}>{DisplayData.time(actualValue)}</span>
+            )}
          </div>
       </td>
    );
