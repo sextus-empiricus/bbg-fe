@@ -3,12 +3,13 @@ import { IconButton } from '@mui/material';
 
 interface Props {
    icon: ReactNode;
+   isActive?: boolean;
    type?: 'color' | 'regular';
    text?: string;
    onClickHandler?: () => void;
 }
 
-const ColumnButton = ({ onClickHandler, type, icon, text }: Props): ReactElement => {
+const ColumnButton = ({ isActive, onClickHandler, type, icon, text }: Props): ReactElement => {
    return (
       <IconButton
          onClick={onClickHandler}
@@ -18,6 +19,7 @@ const ColumnButton = ({ onClickHandler, type, icon, text }: Props): ReactElement
             height: 70,
             flexDirection: 'column',
             bgcolor: type === 'color' ? '#9263e9' : '',
+            borderBottom: isActive ? '3px solid #9263e9' : '3px solid transparent',
             borderRadius: '3px',
          }}
       >

@@ -11,9 +11,13 @@ const getTrades = async (
 ): Promise<GetMyPaginatedResponse> => {
    // QUERY BUILDER:
    let query = '?';
+   // historical:
+   if (queryKeys.historical === 'true') {
+      query += `historical=${queryKeys.historical}`;
+   }
    // currency-filter:
    if (queryKeys.currency !== 'all') {
-      query += `currency=${queryKeys.currency}`;
+      query += `&currency=${queryKeys.currency}`;
    }
    // date-filter:
    if (queryKeys.from && queryKeys.from !== 'Invalid Date') {
@@ -38,6 +42,7 @@ const getTrades = async (
       query += `&page=${queryKeys.page}`;
    }
 
+   console.log({ query });
    const { data } = await axiosInstance.get(`/trades/my${query}`, {
       headers: getJWTHeader(),
    });

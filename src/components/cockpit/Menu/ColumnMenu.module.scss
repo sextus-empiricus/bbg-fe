@@ -1,0 +1,8 @@
+.ColumnMenu {
+  padding: 10px;
+  height: calc(100% - 50px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px 0 0 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+}

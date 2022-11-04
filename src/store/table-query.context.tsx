@@ -1,9 +1,23 @@
-import React, { Context, createContext, Dispatch, ReactNode, useState } from 'react';
+import React, {
+   Context,
+   createContext,
+   Dispatch,
+   ReactNode,
+   useContext,
+   useEffect,
+   useState,
+} from 'react';
 import { GetMyPaginatedQueryInterface } from '@backend';
+
+import { CockpitContextMode, ColumnType } from '../types';
+
+import { CockpitContext } from './cockpit.context';
 
 interface TableQueryContextInterface {
    query: GetMyPaginatedQueryInterface;
    setQueryObject: Dispatch<React.SetStateAction<GetMyPaginatedQueryInterface>>;
+   activeColumn: ColumnType | undefined;
+   setActiveColumn: Dispatch<React.SetStateAction<ColumnType | undefined>>;
 }
 
 interface Props {
@@ -24,9 +38,12 @@ const TableQueryContext: Context<TableQueryContextInterface> = createContext({
       to: undefined,
    },
    setQueryObject: () => {},
+   activeColumn: undefined,
 });
-
+/** This context uses `mode` value of CockpitContext */
 const TableQueryContextProvider = ({ children }: Props) => {
+   const cockpitContext = useContext(CockpitContext);
+   const [activeColumn, setActiveColumn] = useState<ColumnType | undefined>(undefined);
    const [query, setQuery] = useState<GetMyPaginatedQueryInterface>({
       historical: undefined,
       limit: 10,
@@ -38,9 +55,19 @@ const TableQueryContextProvider = ({ children }: Props) => {
       to: undefined,
    });
 
+   useEffect(() => {
+      if (cockpitContext.mode.value === CockpitContextMode.history) {
+         setQuery((prev) => ({ ...prev, historical: 'true' }));
+      } else {
+         setQuery((prev) => ({ ...prev, historical: 'false' }));
+      }
+   }, [cockpitContext.mode.value]);
+
    const contextValue: TableQueryContextInterface = {
       query,
       setQueryObject: setQuery,
+      activeColumn,
+      setActiveColumn,
    };
 
    return <TableQueryContext.Provider value={contextValue}>{children}</TableQueryContext.Provider>;

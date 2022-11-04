@@ -15,6 +15,16 @@
     justify-content: left;
     align-content: center;
   }
+
+  .time {
+    margin-left: 5px;
+    color: grey;
+  }
+}
+
+.__date {
+  max-width: 170px;
+  margin: 0 auto
 }
 
 .text__profit {
@@ -23,6 +33,12 @@
 
 .text__loss {
   color: var(--loss);
+}
+
+@media (max-width: 900px) {
+  .time {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -44,5 +60,9 @@
     .actual {
       justify-content: right;
     }
+  }
+  .__date {
+    max-width: none;
+    margin: 0
   }
 }
