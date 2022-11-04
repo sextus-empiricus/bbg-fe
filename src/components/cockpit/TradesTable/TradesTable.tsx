@@ -3,10 +3,10 @@ import { TradeMinified } from '@backend';
 import { Box } from '@mui/material';
 
 import { CockpitContext } from '../../../store/cockpit.context';
-import { CockpitContextMode } from '../../../types';
+import { CockpitContextMode, ColumnType } from '../../../types';
 
 import { TableRow } from './TableRow/TableRow';
-import { ThActive } from './ThFilter/ThActive';
+import { ThActive } from './ThActive/ThActive';
 import { columnsWidth, columnsWidthKeys } from './constants';
 
 import classes from './TradesTable.module.scss';
@@ -36,50 +36,57 @@ const TradesTable = ({ tradesList }: Props): ReactElement => {
             <thead>
                <tr>
                   <ThActive
+                     columnType={ColumnType.DATE}
                      isDynamic={true}
-                     datasetName='boughtAt'
                      title='date'
                      widthPerc={getColumnWidth(mode, 'date')}
                   />
                   <ThActive
+                     columnType={ColumnType.CURRENCY}
                      isDynamic={true}
-                     datasetName='currency'
                      title='currency'
                      widthPerc={getColumnWidth(mode, 'currency')}
                   />
                   <ThActive
+                     columnType={ColumnType.AMOUNT}
                      isDynamic={true}
-                     datasetName='amount'
                      title='amount'
                      widthPerc={getColumnWidth(mode, 'amount')}
                   />
                   {mode === CockpitContextMode.trades && (
                      <ThActive
+                        columnType={ColumnType.MOVE}
                         isDynamic={false}
                         title='move'
                         widthPerc={getColumnWidth(mode, 'move')}
                      />
                   )}
                   <ThActive
+                     columnType={ColumnType.INVESTS}
                      isDynamic={true}
-                     datasetName='boughtFor'
                      title='invests'
                      widthPerc={getColumnWidth(mode, 'invests')}
                   />
                   <ThActive
+                     columnType={ColumnType.PRICE}
                      isDynamic={true}
-                     datasetName='price'
                      title='prices'
-                     widthPerc={getColumnWidth(mode, 'prices')}
+                     widthPerc={getColumnWidth(mode, 'price')}
                   />
                   {mode === CockpitContextMode.history && (
                      <ThActive
+                        columnType={ColumnType.PROFIT}
                         isDynamic={true}
                         title='profit'
                         widthPerc={getColumnWidth(mode, 'profit')}
                      />
                   )}
-                  <ThActive isDynamic={false} title='' widthPerc={getColumnWidth(mode, 'button')} />
+                  <ThActive
+                     columnType={ColumnType.BUTTON}
+                     isDynamic={false}
+                     title=''
+                     widthPerc={getColumnWidth(mode, 'button')}
+                  />
                </tr>
             </thead>
             <tbody>

@@ -4,7 +4,7 @@ export type columnsWidthKeys =
    | 'amount'
    | 'move'
    | 'invests'
-   | 'prices'
+   | 'price'
    | 'profit'
    | 'button';
 
@@ -15,7 +15,7 @@ export const columnsWidth: { [index: string]: { [index: string]: number } } = {
       amount: 10,
       move: 15,
       invests: 15,
-      prices: 10,
+      price: 10,
       button: 20,
    },
    history: {
@@ -23,7 +23,7 @@ export const columnsWidth: { [index: string]: { [index: string]: number } } = {
       currency: 5,
       amount: 15,
       invests: 15,
-      prices: 13,
+      price: 13,
       profit: 12,
       button: 25,
    },
