@@ -155,7 +155,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
                historicalValue={+trade.tradeHistory.profitPerc}
             ></DoubleTd>
          )}
-         <td>
+         <td style={{ paddingRight: '30px', textAlign: 'right' }}>
             <TableRowButton tradeId={trade.id} />
          </td>
       </motion.tr>
