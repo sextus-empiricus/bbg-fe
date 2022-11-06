@@ -9,7 +9,7 @@ import { CockpitContextMode } from '../../../../types';
 
 import { DisplayData } from './utils/DisplayData';
 import { DoubleTd } from './DoubleTd';
-import { TableRowButton } from './TableRowButton';
+import { RowButton } from './RowButton';
 
 import classes from './TableRow.module.scss';
 
@@ -156,7 +156,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
             ></DoubleTd>
          )}
          <td style={{ paddingRight: '30px', textAlign: 'right' }}>
-            <TableRowButton tradeId={trade.id} />
+            <RowButton tradeId={trade.id} />
          </td>
       </motion.tr>
    );
