@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 
 import { CockpitContext } from '../../../store/cockpit.context';
 import { ModalFormContext } from '../../../store/modal-form.context';
-import { CockpitContextMode, ModalFormMode } from '../../../types/enums';
+import { CockpitContextMode, ModalFormMode } from '../../../types';
 
 const mobileNavH = 60;
 

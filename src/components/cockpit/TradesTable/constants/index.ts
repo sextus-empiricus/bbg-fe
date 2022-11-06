@@ -11,12 +11,12 @@ export type columnsWidthKeys =
 export const columnsWidth: { [index: string]: { [index: string]: number } } = {
    trades: {
       date: 20,
-      currency: 11,
+      currency: 10,
       amount: 10,
-      move: 16,
-      invests: 16,
-      price: 11,
-      button: 14,
+      move: 15,
+      invests: 15,
+      price: 14,
+      button: 15,
    },
    history: {
       date: 25,
