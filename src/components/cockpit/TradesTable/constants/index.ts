@@ -15,8 +15,8 @@ export const columnsWidth: { [index: string]: { [index: string]: number } } = {
       amount: 10,
       move: 15,
       invests: 15,
-      price: 10,
-      button: 20,
+      price: 14,
+      button: 15,
    },
    history: {
       date: 25,
