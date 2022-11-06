@@ -1,6 +1,7 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { Box, Typography } from '@mui/material';
 
+import { CockpitContext } from '../../../store/cockpit.context';
 import { LiveClock } from '../../common/LiveClock';
 
 import classes from './CockpitHeader.module.scss';
@@ -8,6 +9,8 @@ import classes from './CockpitHeader.module.scss';
 const cockpitHeaderMobileH = 60;
 
 const CockpitHeader = (): ReactElement => {
+   const cockpitCtx = useContext(CockpitContext);
+
    return (
       <Box
          display='flex'
@@ -17,7 +20,7 @@ const CockpitHeader = (): ReactElement => {
       >
          <Box display='flex' justifyContent='center' alignItems='center'>
             <Typography variant='h4' component='h2' sx={{ fontSize: { xs: '1rem', sm: '2rem' } }}>
-               Active Trades:
+               {cockpitCtx.title + ':'}
             </Typography>
          </Box>
          <Box display='flex' flexDirection='column' alignItems='end' minWidth={80}>

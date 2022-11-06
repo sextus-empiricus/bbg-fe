@@ -1,21 +1,57 @@
-import React, { ReactElement, useContext } from 'react';
+import React, { ReactElement, useContext, useEffect, useState } from 'react';
 import { AccountBalance, Add, QueryStats, TrendingUp } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Box from '@mui/material/Box';
 
+import { CockpitContext } from '../../../store/cockpit.context';
 import { ModalFormContext } from '../../../store/modal-form.context';
-import { ModalFormMode } from '../../../types/enums';
+import { CockpitContextMode, ModalFormMode } from '../../../types';
 
 const mobileNavH = 60;
 
+const getInitValue = (mode: CockpitContextMode) => {
+   switch (mode) {
+      case CockpitContextMode.trades:
+         return 0;
+      case CockpitContextMode.history:
+         return 1;
+      case CockpitContextMode.statistics:
+         return 2;
+      default:
+         return 0;
+   }
+};
+
 const MobileNav = (): ReactElement => {
    const modalFormCtx = useContext(ModalFormContext);
-   const [value, setValue] = React.useState(0);
+   const cockpitContext = useContext(CockpitContext);
+   const [value, setValue] = useState<number>(0);
+
+   useEffect(() => {
+      setValue(getInitValue(cockpitContext.mode.value));
+   }, [cockpitContext.mode.value]);
 
    const addButtonHandler = () => {
       modalFormCtx.open.open(ModalFormMode.ADD);
+   };
+
+   const onChangeHandler = (newValue: number) => {
+      setValue(newValue);
+      switch (newValue) {
+         case 0:
+            cockpitContext.mode.set(CockpitContextMode.trades);
+            break;
+         case 1:
+            cockpitContext.mode.set(CockpitContextMode.history);
+            break;
+         case 2:
+            cockpitContext.mode.set(CockpitContextMode.statistics);
+            break;
+         default:
+            cockpitContext.mode.set(CockpitContextMode.trades);
+      }
    };
 
    return (
@@ -30,7 +66,7 @@ const MobileNav = (): ReactElement => {
             showLabels
             value={value}
             onChange={(event, newValue) => {
-               setValue(newValue);
+               onChangeHandler(newValue);
             }}
             sx={{ height: mobileNavH, width: '100%', bgcolor: 'transparent' }}
          >
