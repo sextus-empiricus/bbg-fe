@@ -41,8 +41,6 @@ const getTrades = async (
    if (queryKeys.page) {
       query += `&page=${queryKeys.page}`;
    }
-
-   console.log({ query });
    const { data } = await axiosInstance.get(`/trades/my${query}`, {
       headers: getJWTHeader(),
    });
