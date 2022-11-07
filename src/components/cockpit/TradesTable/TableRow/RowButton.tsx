@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Delete, Edit } from '@mui/icons-material';
 import { Button, ButtonGroup, Tooltip } from '@mui/material';
 
@@ -15,6 +15,7 @@ const RowButton = ({ tradeId }: Props) => {
    const {
       mode: { value: mode },
    } = useContext(CockpitContext);
+   const [deleteWarning, setDeleteWarning] = useState<boolean>(false);
    const isTradeMode = mode === CockpitContextMode.trades;
 
    const editButtonHandler = () => {
@@ -22,10 +23,19 @@ const RowButton = ({ tradeId }: Props) => {
       modalFormContext.open.open(ModalFormMode.EDIT);
    };
 
+   const deleteHandler = () => {
+      if (!deleteWarning) {
+         setDeleteWarning(true);
+         return;
+      } else {
+         modalFormContext.deleteHandler(tradeId);
+      }
+   };
+
    const buttonStyles = { paddingY: '8px' };
 
    return (
-      <ButtonGroup variant='outlined' fullWidth>
+      <ButtonGroup variant='outlined' fullWidth sx={{ height: '40px' }}>
          {isTradeMode && <Button sx={buttonStyles}>sell</Button>}
          <Tooltip title='edit'>
             <Button onClick={editButtonHandler} sx={buttonStyles}>
@@ -33,7 +43,11 @@ const RowButton = ({ tradeId }: Props) => {
             </Button>
          </Tooltip>
          <Tooltip title='delete'>
-            <Button sx={buttonStyles}>
+            <Button
+               onMouseLeave={() => setDeleteWarning(false)}
+               sx={{ ...buttonStyles, color: deleteWarning ? '#c16a6a' : 'primary' }}
+               onClick={deleteHandler}
+            >
                <Delete sx={{ fontSize: '1.1rem' }} />
             </Button>
          </Tooltip>

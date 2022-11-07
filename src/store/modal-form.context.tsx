@@ -80,12 +80,12 @@ const ModalFormContextProvider = ({ children }: Props) => {
       try {
          if (modalFormMode === ModalFormMode.ADD) {
             await axiosInstance.post('/trades', dto, { headers: getJWTHeader() });
-            showSnackBar('New trade correctly added', 'success');
+            showSnackBar('New trade added', 'success');
          } else if (modalFormMode === ModalFormMode.EDIT) {
             await axiosInstance.patch(`/trades/my/${tradeId}`, dto, {
                headers: getJWTHeader(),
             });
-            showSnackBar('Trade correctly updated', 'success');
+            showSnackBar('Trade updated', 'success');
          }
          await refetch();
          closeModalFormHandler();
@@ -131,7 +131,7 @@ const ModalFormContextProvider = ({ children }: Props) => {
    const onDeleteHandler = async (tradeId: string) => {
       try {
          await axiosInstance.delete(`/trades/my/${tradeId}`, { headers: getJWTHeader() });
-         showSnackBar('Trade correctly deleted', 'success');
+         showSnackBar('Trade deleted', 'success');
          await refetch();
          closeModalFormHandler();
       } catch (e) {
