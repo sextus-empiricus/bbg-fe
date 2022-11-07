@@ -7,6 +7,7 @@ import { CockpitContextMode, ModalFormMode } from '../../../types';
 
 import { AddEditTradeForm } from './forms/AddEditTradeForm';
 import { EditHistoryForm } from './forms/EditHistoryForm';
+import { SellTradeForm } from './forms/SellTradeForm';
 
 const ModalForm = (): ReactElement => {
    const {
@@ -22,9 +23,29 @@ const ModalForm = (): ReactElement => {
          case ModalFormMode.EDIT: {
             return 'Edit Trade';
          }
+         case ModalFormMode.SELL: {
+            return 'Sell Trade';
+         }
          default: {
             return 'New Trade';
          }
+      }
+   };
+
+   const renderForm = () => {
+      if (modalFormContext.mode.value === ModalFormMode.ADD) {
+         return <AddEditTradeForm onClose={modalFormContext.open.close} />;
+      }
+      if (modalFormContext.mode.value === ModalFormMode.EDIT) {
+         if (cockpitMode === CockpitContextMode.trades) {
+            return <AddEditTradeForm onClose={modalFormContext.open.close} />;
+         }
+         if (cockpitMode === CockpitContextMode.history) {
+            return <EditHistoryForm onClose={modalFormContext.open.close} />;
+         }
+      }
+      if (modalFormContext.mode.value === ModalFormMode.SELL) {
+         return <SellTradeForm onClose={modalFormContext.open.close} />;
       }
    };
 
@@ -59,12 +80,7 @@ const ModalForm = (): ReactElement => {
             <Typography align='center' variant='h4' component='h3' marginBottom={3}>
                {renderTitle()}
             </Typography>
-            {cockpitMode === CockpitContextMode.history &&
-            modalFormContext.mode.value === ModalFormMode.EDIT ? (
-               <EditHistoryForm onClose={modalFormContext.open.close} />
-            ) : (
-               <AddEditTradeForm onClose={modalFormContext.open.close} />
-            )}
+            {renderForm()}
          </Paper>
       </Modal>
    );
