@@ -6,7 +6,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import { axiosInstance, getJWTHeader } from '../../../../axios';
 import { ModalFormContext } from '../../../../store/modal-form.context';
-import { UpdateTradeHistoryDto } from '../dto/UpdateTradeHistory.dto';
+import { UpdateTradeHistoryDto } from '../dto';
 import { CurrencyInput, DateTimeInput, NumberInput } from '../inputs';
 
 import { EditHistoryFormShape } from './EditHistoryForm.shape';
