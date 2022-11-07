@@ -1,23 +1,28 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import { InputAdornment, TextField } from '@mui/material';
 
 interface Props {
+   endAdornment?: string;
    name: string;
    label: string;
 }
 
-const NumberInput = ({ name, label }: Props): ReactElement => {
+const NumberInput = ({ endAdornment, label, name }: Props): ReactElement => {
    const methods = useFormContext();
+
    return (
       <TextField
          label={label}
-         defaultValue={0}
          type='text'
-         variant='outlined'
+         defaultValue={0}
          error={!!methods.formState.errors[name]}
          helperText={(methods.formState.errors[name]?.message ?? ' ') as ReactNode}
+         variant='outlined'
          fullWidth
+         InputProps={{
+            endAdornment: <InputAdornment position='end'>{endAdornment}</InputAdornment>,
+         }}
          {...methods.register(name)}
       />
    );

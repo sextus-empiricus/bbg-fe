@@ -23,7 +23,7 @@ const TableRow = ({ trade }: Props): ReactElement => {
    } = useContext(CockpitContext);
    const { data: actualCurrencyPrice } = useActualCurrencyPrice(trade.currency);
    const { currency, price, boughtFor, boughtAt, amount, iconUrl } = trade;
-   const move: number = (actualCurrencyPrice * 100) / Number(price) - 100;
+   const move: number = (actualCurrencyPrice * 100) / +price - 100;
    const worthToday: number = +boughtFor + (+boughtFor * move) / 100;
 
    const renderDateTd = () => {
