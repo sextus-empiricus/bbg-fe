@@ -7,10 +7,14 @@ import React, {
    useState,
 } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import dayjs from 'dayjs';
 
 import { axiosInstance, getJWTHeader } from '../axios';
-import { AddEditTradeDtoInterface } from '../components/cockpit/ModalForm/dto/AddEditNewTrade.dto';
-import { UpdateTradeHistoryDto } from '../components/cockpit/ModalForm/dto/UpdateTradeHistory.dto';
+import {
+   AddEditTradeDtoInterface,
+   SellTradeDto,
+   UpdateTradeHistoryDto,
+} from '../components/cockpit/ModalForm/dto';
 import { useTrades } from '../components/cockpit/TradesTable/hooks/useTrades';
 import { useSnackBar } from '../components/common/SnackBar/hooks/useSnackBar';
 import { ModalFormMode } from '../types';
@@ -31,6 +35,7 @@ interface ModalFormContextInterface {
    };
    submitHandler: (dto: AddEditTradeDtoInterface) => void;
    submitHandlerHistory: (dto: UpdateTradeHistoryDto) => void;
+   sellHandler: (dto: SellTradeDto) => void;
    deleteHandler: (tradeId: string) => void;
 }
 
@@ -56,6 +61,7 @@ const ModalFormContext: Context<ModalFormContextInterface> = createContext({
    },
    submitHandler: () => {},
    submitHandlerHistory: () => {},
+   sellHandler: () => {},
    deleteHandler: () => {},
 });
 
@@ -64,17 +70,22 @@ const ModalFormContextProvider = ({ children }: Props) => {
    const [tradeId, setTradeId] = useState<string>('');
    const [modalFormMode, setModalFormMode] = useState<ModalFormMode>(ModalFormMode.ADD);
    const { showSnackBar } = useSnackBar();
-   const { refetch } = useTrades();
+   const {
+      refetch,
+      data: { tradesList },
+   } = useTrades();
+   const trade = tradesList.filter((el) => el.id === tradeId)[0];
 
    const openModalFormHandler = (mode: ModalFormMode) => {
       setModalFormMode(mode);
       setOpen(true);
    };
+
    const closeModalFormHandler = () => {
       setOpen(false);
    };
 
-   const onSubmitHandler: SubmitHandler<AddEditTradeDtoInterface> = async (
+   const submitHandler: SubmitHandler<AddEditTradeDtoInterface> = async (
       dto: AddEditTradeDtoInterface,
    ) => {
       try {
@@ -94,7 +105,7 @@ const ModalFormContextProvider = ({ children }: Props) => {
       }
    };
 
-   const onSubmitHistoryHandler: SubmitHandler<UpdateTradeHistoryDto> = async (
+   const submitHandlerHistory: SubmitHandler<UpdateTradeHistoryDto> = async (
       dto: UpdateTradeHistoryDto,
    ) => {
       const { currency, soldAt, sellPrice, buyPrice, profitPerc, profitCash, soldFor, ...trade } =
@@ -128,7 +139,28 @@ const ModalFormContextProvider = ({ children }: Props) => {
       }
    };
 
-   const onDeleteHandler = async (tradeId: string) => {
+   const sellHandler = async (formData: SellTradeDto) => {
+      const { sellPrice } = formData;
+      const dataBuilder = {
+         soldAt: dayjs(),
+         price: sellPrice,
+         soldFor: trade.amount * sellPrice,
+         profitCash: trade.amount * sellPrice - trade.boughtFor,
+         profitPerc: (sellPrice * 100) / trade.price - 100,
+      };
+      try {
+         await axiosInstance.post(`/trade-history/trade/${tradeId}`, dataBuilder, {
+            headers: getJWTHeader(),
+         });
+         showSnackBar('Trade moved to history', 'success');
+         await refetch();
+         closeModalFormHandler();
+      } catch (e) {
+         showSnackBar('Please try again', 'error');
+      }
+   };
+
+   const deleteHandler = async (tradeId: string) => {
       try {
          await axiosInstance.delete(`/trades/my/${tradeId}`, { headers: getJWTHeader() });
          showSnackBar('Trade deleted', 'success');
@@ -153,9 +185,10 @@ const ModalFormContextProvider = ({ children }: Props) => {
          value: modalFormMode,
          set: setModalFormMode,
       },
-      submitHandler: onSubmitHandler,
-      submitHandlerHistory: onSubmitHistoryHandler,
-      deleteHandler: onDeleteHandler,
+      submitHandler,
+      submitHandlerHistory,
+      sellHandler,
+      deleteHandler,
    };
 
    return <ModalFormContext.Provider value={contextValue}>{children}</ModalFormContext.Provider>;

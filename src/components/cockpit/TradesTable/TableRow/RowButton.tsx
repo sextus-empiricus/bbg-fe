@@ -22,6 +22,10 @@ const RowButton = ({ tradeId }: Props) => {
       modalFormContext.tradeId.set(tradeId);
       modalFormContext.open.open(ModalFormMode.EDIT);
    };
+   const sellHandler = () => {
+      modalFormContext.tradeId.set(tradeId);
+      modalFormContext.open.open(ModalFormMode.SELL);
+   };
 
    const deleteHandler = () => {
       if (!deleteWarning) {
@@ -36,7 +40,11 @@ const RowButton = ({ tradeId }: Props) => {
 
    return (
       <ButtonGroup variant='outlined' fullWidth sx={{ height: '40px' }}>
-         {isTradeMode && <Button sx={buttonStyles}>sell</Button>}
+         {isTradeMode && (
+            <Button onClick={sellHandler} sx={buttonStyles}>
+               sell
+            </Button>
+         )}
          <Tooltip title='edit'>
             <Button onClick={editButtonHandler} sx={buttonStyles}>
                <Edit sx={{ fontSize: '1.1rem' }} />
