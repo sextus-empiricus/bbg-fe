@@ -9,10 +9,11 @@ import React, {
 import { SubmitHandler } from 'react-hook-form';
 
 import { axiosInstance, getJWTHeader } from '../axios';
-import { AddEditTradeDtoInterface } from '../components/cockpit/ModalForm/dto/AddNewTrade.dto';
+import { AddEditTradeDtoInterface } from '../components/cockpit/ModalForm/dto/AddEditNewTrade.dto';
+import { UpdateTradeHistoryDto } from '../components/cockpit/ModalForm/dto/UpdateTradeHistory.dto';
 import { useTrades } from '../components/cockpit/TradesTable/hooks/useTrades';
 import { useSnackBar } from '../components/common/SnackBar/hooks/useSnackBar';
-import { ModalFormMode } from '../types/enums';
+import { ModalFormMode } from '../types';
 
 interface ModalFormContextInterface {
    tradeId: {
@@ -29,6 +30,7 @@ interface ModalFormContextInterface {
       set: Dispatch<SetStateAction<ModalFormMode>>;
    };
    submitHandler: (dto: AddEditTradeDtoInterface) => void;
+   submitHandlerHistory: (dto: UpdateTradeHistoryDto) => void;
    deleteHandler: (tradeId: string) => void;
 }
 
@@ -53,6 +55,7 @@ const ModalFormContext: Context<ModalFormContextInterface> = createContext({
       set: () => {},
    },
    submitHandler: () => {},
+   submitHandlerHistory: () => {},
    deleteHandler: () => {},
 });
 
@@ -78,13 +81,47 @@ const ModalFormContextProvider = ({ children }: Props) => {
          if (modalFormMode === ModalFormMode.ADD) {
             await axiosInstance.post('/trades', dto, { headers: getJWTHeader() });
             showSnackBar('New trade correctly added', 'success');
-         } else {
+         } else if (modalFormMode === ModalFormMode.EDIT) {
             await axiosInstance.patch(`/trades/my/${tradeId}`, dto, {
                headers: getJWTHeader(),
             });
             showSnackBar('Trade correctly updated', 'success');
          }
          await refetch();
+         closeModalFormHandler();
+      } catch (e) {
+         showSnackBar('Please try again', 'error');
+      }
+   };
+
+   const onSubmitHistoryHandler: SubmitHandler<UpdateTradeHistoryDto> = async (
+      dto: UpdateTradeHistoryDto,
+   ) => {
+      const { currency, soldAt, sellPrice, buyPrice, profitPerc, profitCash, soldFor, ...trade } =
+         dto;
+      const buildDtoTrade = {
+         currency: currency.toLowerCase(),
+         ...trade,
+         price: buyPrice,
+      };
+      const buildDtoTradeHistory = {
+         soldAt,
+         price: sellPrice,
+         profitPerc,
+         profitCash,
+         soldFor,
+      };
+      try {
+         // updateTrade:
+         await axiosInstance.patch(`/trades/my/${tradeId}`, buildDtoTrade, {
+            headers: getJWTHeader(),
+         });
+         // update tradeHistory:
+         await axiosInstance.patch(`/trade-history/trade/${tradeId}`, buildDtoTradeHistory, {
+            headers: getJWTHeader(),
+         });
+         await refetch();
+         showSnackBar('Trade updated', 'success');
          closeModalFormHandler();
       } catch (e) {
          showSnackBar('Please try again', 'error');
@@ -117,6 +154,7 @@ const ModalFormContextProvider = ({ children }: Props) => {
          set: setModalFormMode,
       },
       submitHandler: onSubmitHandler,
+      submitHandlerHistory: onSubmitHistoryHandler,
       deleteHandler: onDeleteHandler,
    };
 
