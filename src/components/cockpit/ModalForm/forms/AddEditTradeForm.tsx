@@ -7,9 +7,9 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import { axiosInstance, getJWTHeader } from '../../../../axios';
 import { ModalFormContext } from '../../../../store/modal-form.context';
-import { ModalFormMode } from '../../../../types/enums';
-import { AddEditTradeDtoInterface } from '../dto/AddNewTrade.dto';
-import { CurrencyInput, DateTimeInput, MoneyInput, NumberInput } from '../inputs';
+import { ModalFormMode } from '../../../../types';
+import { AddEditTradeDtoInterface } from '../dto/AddEditNewTrade.dto';
+import { CurrencyInput, DateTimeInput, NumberInput } from '../inputs';
 
 import { AddEditTradeShape } from './AddEditTradeForm.shape';
 
@@ -97,10 +97,10 @@ const AddEditTradeForm = ({ onClose }: Props): ReactElement => {
                   />
                </Grid>
                <Grid item width='100%' xs={12} sm={6}>
-                  <MoneyInput name='boughtFor' label='Invests' />
+                  <NumberInput name='boughtFor' label='Invests' endAdornment='$' />
                </Grid>
                <Grid item width='100%' xs={12} sm={6}>
-                  <MoneyInput name='price' label='Price' />
+                  <NumberInput name='price' label='Price' endAdornment='$' />
                </Grid>
                <Grid item width='100%' xs={12} sm={6}>
                   <NumberInput name='amount' label='Amount' />
