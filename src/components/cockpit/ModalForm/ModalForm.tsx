@@ -1,12 +1,17 @@
 import React, { ReactElement, useContext } from 'react';
 import { Modal, Paper, Typography } from '@mui/material';
 
+import { CockpitContext } from '../../../store/cockpit.context';
 import { ModalFormContext } from '../../../store/modal-form.context';
-import { ModalFormMode } from '../../../types/enums';
+import { CockpitContextMode, ModalFormMode } from '../../../types';
 
 import { AddEditTradeForm } from './forms/AddEditTradeForm';
+import { EditHistoryForm } from './forms/EditHistoryForm';
 
 const ModalForm = (): ReactElement => {
+   const {
+      mode: { value: cockpitMode },
+   } = useContext(CockpitContext);
    const modalFormContext = useContext(ModalFormContext);
 
    const renderTitle = () => {
@@ -15,7 +20,7 @@ const ModalForm = (): ReactElement => {
             return 'New Trade';
          }
          case ModalFormMode.EDIT: {
-            return 'Edit';
+            return 'Edit Trade';
          }
          default: {
             return 'New Trade';
@@ -34,10 +39,11 @@ const ModalForm = (): ReactElement => {
                transform: 'translate(-50%, -50%)',
                minWidth: '350px',
                maxWidth: '550px',
-               minHeight: {
+               height: {
                   xs: '100vh',
                   sm: 'auto',
                },
+               overflowY: 'scroll',
                width: {
                   xs: '100vw',
                },
@@ -45,15 +51,20 @@ const ModalForm = (): ReactElement => {
                   xs: '20px',
                   sm: '25px',
                },
-               backgroundColor: 'rgba(255,255,255,0.05)',
-               backdropFilter: 'blur(10px)',
+               background:
+                  'linear-gradient(144.39deg, #ffffff -278.56%, #6d6d6d -78.47%, #170f26 91.61%)',
                border: 'none',
             }}
          >
             <Typography align='center' variant='h4' component='h3' marginBottom={3}>
                {renderTitle()}
             </Typography>
-            <AddEditTradeForm onClose={modalFormContext.open.close} />
+            {cockpitMode === CockpitContextMode.history &&
+            modalFormContext.mode.value === ModalFormMode.EDIT ? (
+               <EditHistoryForm onClose={modalFormContext.open.close} />
+            ) : (
+               <AddEditTradeForm onClose={modalFormContext.open.close} />
+            )}
          </Paper>
       </Modal>
    );
