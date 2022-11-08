@@ -40,8 +40,6 @@ const DateFilter = (): ReactElement => {
    const handleSwitchChange = () => {
       setShowDateInputs((prev) => {
          if (prev) {
-            setFromDate(null);
-            setToDate(null);
             setFromDateHandler(null);
             setToDateHandler(null);
             return !prev;
@@ -58,6 +56,12 @@ const DateFilter = (): ReactElement => {
    };
    const closeModalDateRangePickerHandler = () => {
       setShowModalDateRangePicker(false);
+   };
+   const onResetHandler = () => {
+      setFromDateHandler(null);
+      setToDateHandler(null);
+      setShowDateInputs(false);
+      closeModalDateRangePickerHandler();
    };
 
    return (
@@ -108,6 +112,7 @@ const DateFilter = (): ReactElement => {
             inputProps={{ 'aria-label': 'controlled' }}
          />
          <ModalDateRangePicker
+            onResetHandler={onResetHandler}
             closeModalHandler={closeModalDateRangePickerHandler}
             showModalDateRangePicker={showModalDateRangePicker}
             fromDateValue={fromDate}
