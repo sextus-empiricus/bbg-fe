@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
-import { Box, Dialog, Typography } from '@mui/material';
+import { Box, Button, Dialog, Typography } from '@mui/material';
 import { CalendarPicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 
 interface Props {
+   onResetHandler: () => void;
    fromDateValue: Dayjs | null;
    toDateValue: Dayjs | null;
    closeModalHandler: () => void;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const ModalDateRangePicker = ({
+   onResetHandler,
    closeModalHandler,
    fromDateValue,
    showModalDateRangePicker,
@@ -22,19 +24,23 @@ const ModalDateRangePicker = ({
 }: Props): ReactElement => {
    return (
       <Dialog
-         maxWidth='lg'
          open={showModalDateRangePicker}
          onClose={closeModalHandler}
          PaperProps={{
             sx: {
+               height: { xs: '100vh', sm: 'auto' },
+               maxHeight: { xs: '100vh', sm: 'auto' },
+               width: { xs: '100vw', sm: 'auto' },
+               maxWidth: { xs: '100vw', sm: 'auto' },
+               //
                margin: 0,
-               bgcolor: 'rgba(47, 47, 47, 0.5)',
-               backdropFilter: 'blur(5px)',
                padding: 2,
+               background:
+                  'linear-gradient(144.39deg, #ffffff -278.56%, #6d6d6d -78.47%, #170f26 91.61%)',
             },
          }}
       >
-         <Box display='flex'>
+         <Box display='flex' flexDirection={{ xs: 'column', sm: 'row' }}>
             <Box display='flex' flexDirection='column'>
                <Typography variant='body1' component='span' textAlign='center'>
                   From
@@ -62,9 +68,12 @@ const ModalDateRangePicker = ({
                </Box>
             </Box>
          </Box>
-         <Typography variant='subtitle2' component='span' textAlign='center' sx={{ opacity: 0.5 }}>
-            [ESC]
-         </Typography>
+         <Button variant='contained' fullWidth sx={{ marginBottom: 2 }} onClick={closeModalHandler}>
+            ok
+         </Button>
+         <Button variant='outlined' fullWidth sx={{ marginBottom: 2 }} onClick={onResetHandler}>
+            reset
+         </Button>
       </Dialog>
    );
 };
