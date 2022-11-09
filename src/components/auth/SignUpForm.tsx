@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { AuthDtoInterface } from '@backend';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { Email, Lock } from '@mui/icons-material';
@@ -8,6 +9,7 @@ import * as Yup from 'yup';
 import { boolean, object, string } from 'yup';
 
 import { useAuth } from '../../auth/useAuth';
+import { useSnackBar } from '../common/SnackBar/hooks/useSnackBar';
 
 import { AuthCheckBox, AuthInput } from './elements/';
 import { useFormError } from './hooks/useFormError';
@@ -31,19 +33,27 @@ const SignupDtoSchema = object().shape({
 
 const SignUpForm = (): ReactElement => {
    const { signUp } = useAuth();
+   const { showSnackBar } = useSnackBar();
+   const navigate = useNavigate();
    const methods = useForm<SignUpFormDto>({ resolver: yupResolver(SignupDtoSchema) });
    const { setFieldError, setAllErrors } = useFormError(methods);
 
    const onSubmit: SubmitHandler<SignUpFormDto> = async (authDto) => {
       const { email, password } = authDto;
-      const response = await signUp({ email, password });
-      if (response.message === 'Network Error') {
+      try {
+         const response = await signUp({ email, password });
+         if (response.message === 'Network Error') {
+            setAllErrors();
+         } else if (!response.status) {
+            setFieldError('email', response.message);
+         } else {
+            showSnackBar('Singed up', 'success');
+            navigate('/cockpit');
+         }
+      } catch (e) {
          setAllErrors();
-      } else if (!response.status) {
-         setFieldError('email', response.message);
+         showSnackBar('Something went wrong', 'error');
       }
-
-      console.log('Data submitted!✅', authDto);
    };
 
    return (

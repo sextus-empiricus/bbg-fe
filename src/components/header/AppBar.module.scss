@@ -7,12 +7,11 @@
   -webkit-background-clip: text;
 }
 
-.span-email {
-  margin-right: 10px;
-
+.logo:hover {
+  cursor: pointer;
 }
 
-.span-email:hover {
-  color: plum;
-  cursor: pointer;
+.span-email {
+  opacity: .8;
+  line-height: 36px;
 }
