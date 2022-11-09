@@ -8,7 +8,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import { axiosInstance, getJWTHeader } from '../../../../axios';
 import { ModalFormContext } from '../../../../store/modal-form.context';
 import { ModalFormMode } from '../../../../types';
-import { AddEditTradeDtoInterface } from '../dto/AddEditNewTrade.dto';
+import { AddEditTradeDtoInterface } from '../dto';
 import { CurrencyInput, DateTimeInput, NumberInput } from '../inputs';
 
 import { AddEditTradeShape } from './AddEditTradeForm.shape';

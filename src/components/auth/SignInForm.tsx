@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { AuthDtoInterface } from '@backend';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Email, Lock } from '@mui/icons-material';
@@ -7,6 +8,7 @@ import { Box, Button, Grid, Link, Paper, Typography } from '@mui/material';
 import { object, string } from 'yup';
 
 import { useAuth } from '../../auth/useAuth';
+import { useSnackBar } from '../common/SnackBar/hooks/useSnackBar';
 
 import { useFormError } from './hooks/useFormError';
 import { AuthInput, Separator } from './elements';
@@ -20,17 +22,27 @@ const SigninDtoSchema = object().shape({
 
 const SignInForm = (): ReactElement => {
    const { signIn } = useAuth();
+   const { showSnackBar } = useSnackBar();
+   const navigate = useNavigate();
    const methods = useForm<AuthDtoInterface>({
       resolver: yupResolver(SigninDtoSchema),
    });
    const { setAllErrors } = useFormError(methods);
 
    const onSubmit: SubmitHandler<AuthDtoInterface> = async (authDto) => {
-      const res = await signIn(authDto);
-      if (res.message === 'Network Error') {
+      try {
+         const res = await signIn(authDto);
+         if (res.message === 'Network Error') {
+            setAllErrors();
+         } else if (!res.status) {
+            setAllErrors('Incorrect email or password');
+         } else {
+            showSnackBar('Logged in', 'success');
+            navigate('/cockpit');
+         }
+      } catch (e) {
          setAllErrors();
-      } else if (!res.status) {
-         setAllErrors('Incorrect email or password');
+         showSnackBar('Something went wrong', 'error');
       }
    };
 
