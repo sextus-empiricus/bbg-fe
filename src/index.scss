@@ -10,10 +10,30 @@
 }
 
 body {
-  color: white;
+  color: #f7f7f7;
   font-family: Poppins, Roboto, sans-serif;
+  background-color: #221669;
 }
 
+.button-gradient {
+  background: linear-gradient(157.81deg, #f1defa -43.27%, #ddbef5 -21.24%, #c69df0 12.19%, #a77deb 29.82%, #975ce6 51.94%, #7d33cf 90.29%)
+}
+
+.title_gradient {
+  color: transparent;
+  background: linear-gradient(90deg, #4ca5ff 2.34%, #b673f8 100.78%);
+  -webkit-background-clip: text;
+}
+
+.subtitle_color {
+  color: #97b5d4;
+}
+
+.text-white {
+  color: #f7f7f7;
+}
+
+//scroll-bar:
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

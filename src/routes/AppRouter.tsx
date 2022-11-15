@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { CockpitView, LayoutView, SignInView, SignUpView, TestsView } from '../views';
+import { CockpitView, LandingPage, LayoutView, SignInView, SignUpView, TestsView } from '../views';
 
 const AppRouter = (): ReactElement => {
    return (
       <Routes>
-         <Route path='/' element={<h1>init🚀</h1>} />
+         <Route path='/' element={<LandingPage />} />
          <Route path='/layout' element={<LayoutView />} />
          <Route path='/cockpit' element={<CockpitView />} />
          <Route path='/signin' element={<SignInView />} />
