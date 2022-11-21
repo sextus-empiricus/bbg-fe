@@ -17,13 +17,13 @@ const LandingPage = (): ReactElement => {
          <SectionContainer sectionId='hero'>
             <Hero />
          </SectionContainer>
-         <SectionContainer sectionId='stats'>
+         <SectionContainer>
             <Stats />
          </SectionContainer>
          <SectionContainer sectionId='features'>
             <Features />
          </SectionContainer>
-         <SectionContainer sectionId='details'>
+         <SectionContainer sectionId='about'>
             <Details />
          </SectionContainer>
          <SectionContainer>
