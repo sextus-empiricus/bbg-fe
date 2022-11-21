@@ -1,70 +1,66 @@
 import React, { ReactElement } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 import { useUser } from '../../auth/useUser';
+import { APP_PATHS } from '../../types/enums/app-paths.enum';
 
-import { AccountMenu } from './AccountMenu';
-
-import classes from './AppBar.module.scss';
+import { AccountNav, Burger, HomeNav, Logo, SignButton } from './elements';
 
 const AppBar = (): ReactElement => {
    const navigate = useNavigate();
+   const location = useLocation();
    const { user, isLoading } = useUser();
-   const buttonStyle = { height: '32px' };
+   const isHomePage = location.pathname === APP_PATHS.HOME;
 
    const onLogoClickHandler = () => {
-      if (user) {
-         navigate('/cockpit');
-      } else {
-         navigate('/');
-      }
+      navigate(APP_PATHS.HOME);
    };
 
    return (
       <Box
-         position='fixed'
-         display='flex'
-         justifyContent='space-between'
-         alignItems='center'
-         paddingX={{
-            xs: 1,
-            sm: 3,
-         }}
+         paddingX={{ xs: 2, sm: 5, md: 6, xl: 0 }}
          height={50}
+         width='100vw'
+         position='fixed'
          top={0}
          left={0}
-         width='100%'
+         display='flex'
+         justifyContent='center'
+         alignItems='center'
          zIndex={100}
          sx={{
-            bgcolor: 'rgba(0, 0, 0, 0.5)',
-            backdropFilter: 'blur(5px)',
+            bgcolor: 'rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(10px)',
          }}
       >
-         <h1 className={classes.logo} onClick={onLogoClickHandler}>
-            BBG
-         </h1>
-         <Box display='flex' justifyContent='center' alignContent='center'>
-            {!user && (
-               <Box>
-                  <Button
-                     variant='contained'
-                     sx={{ ...buttonStyle, marginRight: '16px' }}
-                     onClick={() => navigate('/signup')}
-                  >
-                     sign up
-                  </Button>
-                  <Button variant='outlined' sx={buttonStyle} onClick={() => navigate('/signin')}>
-                     sign in
-                  </Button>
-               </Box>
-            )}
-            {user && !isLoading && (
-               <Box display='flex' justifyContent='center' alignContent='center'>
-                  <span className={classes['span-email']}>{user.email}</span>
-                  <AccountMenu />
-               </Box>
-            )}
+         <Box width='100%' maxWidth='lg' justifyContent='space-between' alignItems='center'>
+            <Box width='100%' display='flex' justifyContent='space-between' alignItems='center'>
+               <Logo onClick={onLogoClickHandler} />
+               {!user && (
+                  <>
+                     <Burger />
+                     <Box
+                        display={{ xs: 'none', sm: 'flex' }}
+                        justifyContent='center'
+                        alignItems='center'
+                     >
+                        {isHomePage && <HomeNav />}
+                        <SignButton
+                           variant='contained'
+                           onClick={() => navigate(APP_PATHS.SIGNUP)}
+                           sx={{ marginRight: '15px' }}
+                        >
+                           sign up
+                        </SignButton>
+                        <SignButton variant='outlined' onClick={() => navigate(APP_PATHS.SIGNIN)}>
+                           sign up
+                        </SignButton>
+                     </Box>
+                  </>
+               )}
+               {user && !isLoading && <AccountNav email={user.email} />}
+            </Box>
          </Box>
       </Box>
    );

@@ -1,11 +1,13 @@
 import React, { MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AccountCircle, Home, Logout } from '@mui/icons-material';
+import { AccountCircle, Home, Logout, TableChart } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-import { useAuth } from '../../auth/useAuth';
+import { useAuth } from '../../../../auth/useAuth';
+import { APP_PATHS } from '../../../../types/enums/app-paths.enum';
 
 const AccountMenu = () => {
    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -25,17 +27,12 @@ const AccountMenu = () => {
    const handleLogout = () => {
       handleClose();
       signOut();
-      navigate('/');
-   };
-
-   const handeGoToCockpit = () => {
-      handleClose();
-      navigate('/cockpit');
+      navigate(APP_PATHS.HOME);
    };
 
    return (
-      <div>
-         <Button onClick={handleClick} sx={{ minWidth: '36px' }}>
+      <Box>
+         <Button onClick={handleClick} sx={{ minWidth: '36px', fontSize: '30px' }}>
             <AccountCircle />
          </Button>
          <Menu
@@ -51,8 +48,12 @@ const AccountMenu = () => {
                horizontal: 'right',
             }}
          >
-            <MenuItem onClick={handeGoToCockpit}>
+            <MenuItem onClick={() => navigate(APP_PATHS.HOME)}>
                <Home sx={menuIconStyle} />
+               Home
+            </MenuItem>
+            <MenuItem onClick={() => navigate(APP_PATHS.COCKPIT)}>
+               <TableChart sx={menuIconStyle} />
                Cockpit
             </MenuItem>
             <MenuItem onClick={handleLogout}>
@@ -60,7 +61,7 @@ const AccountMenu = () => {
                Logout
             </MenuItem>
          </Menu>
-      </div>
+      </Box>
    );
 };
 
