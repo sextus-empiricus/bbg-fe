@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 import { UserCurrenciesEntity } from '@backend';
 import { Box } from '@mui/material';
 
-import { CurrencyFilter } from './CurrencyFilter/CurrencyFilter';
-import { DateFilter } from './DateFilter/DateFilter';
+import { CurrencyFilter } from './elements/CurrencyFilter/CurrencyFilter';
+import { DateFilter } from './elements/DateFilter/DateFilter';
 
 interface Props {
    userCurrencies: UserCurrenciesEntity[];

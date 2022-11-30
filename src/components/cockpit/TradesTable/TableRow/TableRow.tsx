@@ -7,9 +7,8 @@ import { useActualCurrencyPrice } from '../../../../hooks/useActualCurrencyPrice
 import { CockpitContext } from '../../../../store/cockpit.context';
 import { CockpitContextMode } from '../../../../types';
 
-import { DisplayData } from './utils/DisplayData';
-import { DoubleTd } from './DoubleTd';
-import { RowButton } from './RowButton';
+import { DoubleTd, RowButton } from './elements';
+import { DisplayData } from './utils';
 
 import classes from './TableRow.module.scss';
 

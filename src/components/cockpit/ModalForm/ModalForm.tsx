@@ -5,9 +5,7 @@ import { CockpitContext } from '../../../store/cockpit.context';
 import { ModalFormContext } from '../../../store/modal-form.context';
 import { CockpitContextMode, ModalFormMode } from '../../../types';
 
-import { AddEditTradeForm } from './forms/AddEditTradeForm';
-import { EditHistoryForm } from './forms/EditHistoryForm';
-import { SellTradeForm } from './forms/SellTradeForm';
+import { AddEditTradeForm, EditHistoryForm, SellTradeForm } from './forms';
 
 const ModalForm = (): ReactElement => {
    const {

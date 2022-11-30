@@ -11,7 +11,7 @@ const CockpitContainer = ({ children }: Props): ReactElement => {
       <Box
          sx={{
             width: '100%',
-            maxWidth: '1300px',
+            maxWidth: 'xl',
             marginY: { xs: 0, sm: 5 },
             marginX: {
                xs: 0,

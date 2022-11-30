@@ -34,7 +34,12 @@ const AppBar = (): ReactElement => {
             backdropFilter: 'blur(10px)',
          }}
       >
-         <Box width='100%' maxWidth='lg' justifyContent='space-between' alignItems='center'>
+         <Box
+            width='100%'
+            maxWidth={isHomePage ? 'lg' : 'xl'}
+            justifyContent='space-between'
+            alignItems='center'
+         >
             <Box width='100%' display='flex' justifyContent='space-between' alignItems='center'>
                <Logo onClick={onLogoClickHandler} />
                {!user && (

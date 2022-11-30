@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { AttachMoney, CurrencyExchange, DateRange, Percent } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 
-import { DisplayData } from './utils/DisplayData';
+import { DisplayData } from '../utils';
 
 import classes from './DoubleTd.module.scss';
 

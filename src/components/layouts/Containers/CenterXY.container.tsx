@@ -14,8 +14,6 @@ const CenterXYContainer = ({ headerHeight, footerHeight, children }: Props): Rea
    const minusHeader = headerHeight ? `- ${headerHeight}px` : '';
    const minusFooter = footerHeight ? `- ${footerHeight}px` : '';
 
-   console.log(`calc(100vh ${minusFooter} ${minusHeader})`);
-
    return (
       <Box
          display='flex'

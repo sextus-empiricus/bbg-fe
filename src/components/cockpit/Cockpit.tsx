@@ -1,5 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import { Box } from '@mui/material';
+
+import { CockpitContext } from '../../store/cockpit.context';
+import { CockpitContextMode } from '../../types';
 
 import { CockpitHeader } from './CockpitHeader/CockpitHeader';
 import { ColumnMenu } from './Menu/ColumnMenu';
@@ -16,6 +19,9 @@ import { TradesTable } from './TradesTable/TradesTable';
 import classes from './Cockpit.module.scss';
 
 const Cockpit = (): ReactElement => {
+   const {
+      mode: { value: cockpitMode },
+   } = useContext(CockpitContext);
    const {
       data: { tradesList, userCurrencies },
    } = useTrades();
@@ -37,7 +43,19 @@ const Cockpit = (): ReactElement => {
                   }}
                   className={classes.background}
                >
-                  <TradesTable tradesList={tradesList} />
+                  {cockpitMode === CockpitContextMode.statistics ? (
+                     <Box
+                        height='100%'
+                        width='100%'
+                        display='flex'
+                        justifyContent='center'
+                        alignItems='center'
+                     >
+                        <p>In progress...</p>
+                     </Box>
+                  ) : (
+                     <TradesTable tradesList={tradesList} />
+                  )}
                </Box>
                <Box
                   position='relative'
@@ -47,6 +65,7 @@ const Cockpit = (): ReactElement => {
                   justifyContent='center'
                   alignItems='center'
                   borderRadius={{ xs: 'none', sm: '0 0 10px 0' }}
+                  sx={{ backdropFilter: 'blur(10px)' }}
                >
                   <div className={classes['border-line']} />
                   <PaginationController />
