@@ -59,7 +59,7 @@ const AppBar = (): ReactElement => {
                            sign up
                         </SignButton>
                         <SignButton variant='outlined' onClick={() => navigate(APP_PATHS.SIGNIN)}>
-                           sign up
+                           sign in
                         </SignButton>
                      </Box>
                   </>
