@@ -8,6 +8,7 @@ import { Box, Button, Grid, Link, Paper, Typography } from '@mui/material';
 import { object, string } from 'yup';
 
 import { useAuth } from '../../auth/useAuth';
+import { APP_PATHS } from '../../types/enums/app-paths.enum';
 import { useSnackBar } from '../common/SnackBar/hooks/useSnackBar';
 
 import { useFormError } from './hooks/useFormError';
@@ -38,7 +39,7 @@ const SignInForm = (): ReactElement => {
             setAllErrors('Incorrect email or password');
          } else {
             showSnackBar('Logged in', 'success');
-            navigate('/cockpit');
+            navigate(APP_PATHS.COCKPIT);
          }
       } catch (e) {
          setAllErrors();

@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import { boolean, object, string } from 'yup';
 
 import { useAuth } from '../../auth/useAuth';
+import { APP_PATHS } from '../../types/enums/app-paths.enum';
 import { useSnackBar } from '../common/SnackBar/hooks/useSnackBar';
 
 import { AuthCheckBox, AuthInput } from './elements/';
@@ -48,7 +49,7 @@ const SignUpForm = (): ReactElement => {
             setFieldError('email', response.message);
          } else {
             showSnackBar('Singed up', 'success');
-            navigate('/cockpit');
+            navigate(APP_PATHS.COCKPIT);
          }
       } catch (e) {
          setAllErrors();
@@ -95,7 +96,7 @@ const SignUpForm = (): ReactElement => {
             </Typography>
             <Typography variant='body1' component='p' marginY={1}>
                Not sure yet?
-               <Link variant='subtitle1' href='#' marginLeft={1}>
+               <Link variant='subtitle1' href={APP_PATHS.HOME} marginLeft={1}>
                   Learn more!
                </Link>
             </Typography>
