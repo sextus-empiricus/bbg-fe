@@ -19,7 +19,7 @@ const CenterXYContainer = ({ headerHeight, footerHeight, children }: Props): Rea
          display='flex'
          justifyContent='center'
          alignItems='center'
-         minHeight={{ xs: 'auto', sm: `calc(100vh ${minusFooter} ${minusHeader})` }}
+         minHeight={`calc(100vh ${minusFooter} ${minusHeader})`}
       >
          {children}
       </Box>
