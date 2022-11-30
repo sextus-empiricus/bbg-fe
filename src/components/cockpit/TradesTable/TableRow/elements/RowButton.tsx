@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Delete, Edit } from '@mui/icons-material';
 import { Button, ButtonGroup, Tooltip } from '@mui/material';
 
-import { CockpitContext } from '../../../../store/cockpit.context';
-import { ModalFormContext } from '../../../../store/modal-form.context';
-import { CockpitContextMode, ModalFormMode } from '../../../../types';
+import { CockpitContext } from '../../../../../store/cockpit.context';
+import { ModalFormContext } from '../../../../../store/modal-form.context';
+import { CockpitContextMode, ModalFormMode } from '../../../../../types';
 
 interface Props {
    tradeId: string;

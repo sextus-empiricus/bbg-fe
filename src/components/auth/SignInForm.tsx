@@ -64,7 +64,6 @@ const SignInForm = (): ReactElement => {
                <Grid container>
                   <Grid item width='100%'>
                      <AuthInput
-                        defaultValue='test@test.test'
                         name='email'
                         type='text'
                         placeholder='Email'
@@ -74,7 +73,6 @@ const SignInForm = (): ReactElement => {
                   </Grid>
                   <Grid item width='100%'>
                      <AuthInput
-                        defaultValue='test1234'
                         name='password'
                         type='password'
                         placeholder='Password'

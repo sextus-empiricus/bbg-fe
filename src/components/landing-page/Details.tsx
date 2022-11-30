@@ -39,7 +39,7 @@ const Details = (): ReactElement => {
                      justifyContent='center'
                      textAlign={isEven ? 'left' : 'right'}
                   >
-                     <Title>{el.title}</Title>
+                     <Title sx={{ marginBottom: 2 }}>{el.title}</Title>
                      <Box
                         sx={{
                            padding: '10px 20px',

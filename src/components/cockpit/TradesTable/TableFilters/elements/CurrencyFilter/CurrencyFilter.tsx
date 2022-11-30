@@ -2,7 +2,7 @@ import React, { ReactElement, SyntheticEvent, useContext, useState } from 'react
 import { GetMyPaginatedQueryInterface, UserCurrenciesEntity } from '@backend';
 import { Tab, Tabs } from '@mui/material';
 
-import { TableQueryContext } from '../../../../../store/table-query.context';
+import { TableQueryContext } from '../../../../../../store/table-query.context';
 
 interface Props {
    userCurrencies: UserCurrenciesEntity[];
