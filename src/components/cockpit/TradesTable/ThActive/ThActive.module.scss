@@ -1,0 +1,19 @@
+.ThActive {
+  padding: 0 8px;
+  height: 30px;
+  text-align: center;
+  font-size: .8rem;
+  font-weight: 300;
+  user-select: none;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dynamic:hover {
+  cursor: pointer;
+  user-select: none;
+}

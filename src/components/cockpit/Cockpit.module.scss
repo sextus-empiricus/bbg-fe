@@ -1,0 +1,39 @@
+.main {
+  display: flex;
+  max-height: calc(100vh - 250px);
+}
+
+.left {
+  margin-top: 50px;
+  height: calc(100vh - 250px);
+}
+
+.right {
+  width: 100%;
+  position: relative;
+  height: calc(100vh - 250px);
+
+  .background {
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+  }
+
+  .border-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  }
+}
+
+@media (max-width: 600px) {
+  .right {
+    height: calc(100vh - 110px);
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

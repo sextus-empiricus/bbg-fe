@@ -1,0 +1,20 @@
+.TradesTable {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+
+  thead {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(90deg, rgb(37, 58, 90) 10%, rgba(12, 19, 31, 0.75) 100%);
+    z-index: 10;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .TradesTable {
+    thead {
+      display: none;
+    }
+  }
+}

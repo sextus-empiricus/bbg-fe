@@ -1,0 +1,24 @@
+.Separator {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: .8rem;
+  font-weight: 300;
+  color: white;
+}
+
+.Separator::before,
+.Separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #5b5b5b;
+}
+
+.Separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.Separator:not(:empty)::after {
+  margin-left: .25em;
+}

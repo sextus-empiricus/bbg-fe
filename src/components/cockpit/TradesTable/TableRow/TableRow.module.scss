@@ -1,0 +1,79 @@
+.Table-row {
+  font-weight: 300;
+  height: 90px;
+
+  td {
+    text-align: center;
+  }
+}
+
+.Table-row:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.15);
+  //background-color: rgba(255, 255, 255, 0.07);
+}
+
+.td-date {
+  .time {
+    margin-left: 5px;
+    color: grey;
+  }
+}
+
+.td-currency-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.td-currency-icon {
+  margin-right: 5px;
+  width: 26px;
+}
+
+
+.text__profit {
+  color: var(--profit);
+}
+
+.text__loss {
+  color: var(--loss);
+}
+
+
+@media (max-width: 900px) {
+  .td-date {
+    .time {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .Table-row {
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    td {
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+      text-align: right;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    td::before {
+      position: absolute;
+      content: attr(data-label);
+      left: 0;
+      padding-left: 15px;
+      font-size: .9rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .td-currency-wrapper {
+      justify-content: right;
+    }
+  }
+}
